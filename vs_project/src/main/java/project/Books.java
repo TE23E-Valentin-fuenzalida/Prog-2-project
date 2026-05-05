@@ -1,5 +1,8 @@
 package project;
-
+/* 
+Valentin fuenzalida ribbing
+Books innehåller variabler med en konstuktor, setters och getters.
+*/
 public class Books extends library{
     // variabler för Books
     private String author;
@@ -33,5 +36,10 @@ public class Books extends library{
     }
     public void setPages(int pages) {
         this.pages = pages;
+    }
+
+     @Override
+    public String toString() {
+        return "\n"+"id: "+id+"\n title: "+title+"\n author: "+author+"\n genre: "+genre+"\n pages: "+pages+"\n isAvailable: "+isAvailable+"\n";
     }
 }

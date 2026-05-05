@@ -1,5 +1,8 @@
 package project;
-
+/* 
+Valentin fuenzalida ribbing
+library innehåller variabler med en konstuktor och getters.
+*/
 public abstract class library {
     // variabler
     protected String id;
@@ -22,5 +25,10 @@ public abstract class library {
     }
     public boolean getIsAvailable(){
         return isAvailable;
+    }
+
+    @Override
+    public String toString() {
+        return "id: "+id+"\n title: "+title+"\n isAvailable: "+isAvailable+"\n";
     }
 }
