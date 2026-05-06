@@ -29,6 +29,8 @@ import java.util.stream.Collectors;
 import javax.swing.plaf.FontUIResource;
 
 public class Main {
+    // baseURL
+    public static final String baseURL = "http://10.151.168.5:3148/";
     void main() {
 
         // ArrayLists
@@ -36,7 +38,6 @@ public class Main {
         ArrayList<Books> bokLista = new ArrayList<>();
 
         // baseURL för webbsidan
-        String baseURL = "http://10.151.168.5:3148/";
         String booksURL = "http://10.151.168.5:3148/books";
         String magazineURL = "http://10.151.168.5:3148/magazines";
         Gson gson = new Gson();
@@ -49,11 +50,11 @@ public class Main {
             IO.println(
                     """
                             välj vad du vill göra
-                                1. Hämta böcker (hämta böcker från Servern och lagra lokalt i ex ArrayList).
-                                2. Hämta tidningar (hämta tidningar från Servern och lagra lokalt i ex ArrayList).
+                                1. Hämta böcker.
+                                2. Hämta tidningar.
                                 3. Skriva ut hämtade böcker eller tidningar på skärmen
-                                4. Lägg till bok, skapa ett bokobjekt där användaren får mata in titel, författare, genre, pages (antal sidor) och spara den i en Samling (ex ArrayList).
-                                5. Lägg till tidning, skapa ett tidningsobjekt där användaren får mata in titel, författare, genre, pages (antal sidor) etc och spara den i en Samling (exArrayList).
+                                4. Lägg till bok.
+                                5. Lägg till tidning.
                                 6. Avsluta
                                 """);
             String val = IO.readln();
@@ -61,6 +62,7 @@ public class Main {
             switch (val) {
                 case "1":
                     HttpResponse<String> get_all_ResponseBooks;
+                    // hämtar URL och lagrar den i 
                     try {
                         get_all_ResponseBooks = Unirest.get(booksURL).asString();
                     } catch (Exception e) {
@@ -131,8 +133,17 @@ public class Main {
                     IO.println("genre (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
                     String genre = IO.readln();
 
-                    IO.println("Sidor");
-                    int pages = Integer.parseInt(IO.readln());
+                    int pages = 0;
+                    while (true) {
+                        IO.println("Sidor");
+                        String sidor = IO.readln();
+                        try {
+                            pages = Integer.parseInt(sidor);
+                            break;
+                        } catch (NumberFormatException e) {
+                            IO.println("fel inmattning. skriv ett nummer");
+                        }
+                    }
 
                     get_all_bodybooks = "";
                     // sätter id som en plus lenghten av hela arraylisten
@@ -147,19 +158,36 @@ public class Main {
                     IO.println("Titel: ");
                     title = IO.readln();
 
-                    IO.println("IssueNumber: ");
-                    int issueNumber = Integer.parseInt(IO.readln());
-
+                    int issueNumber = 0;
+                    while (true) {
+                        IO.println("Issue Number: ");
+                        String Number = IO.readln();
+                        try {
+                            issueNumber = Integer.parseInt(Number);
+                            break;
+                        } catch (NumberFormatException e) {
+                            IO.println("fel inmattning. skriv ett nummer");
+                        }
+                    }
 
                     IO.println("Category");
                     String category = IO.readln();
 
-                    IO.println("Published Year: ");
-                    int publishedYear = Integer.parseInt(IO.readln());
+                    int publishedYear = 0;
+                    while (true) {
+                        IO.println("Published Year: ");
+                        String Year = IO.readln();
+                        try {
+                            publishedYear = Integer.parseInt(Year);
+                            break;
+                        } catch (NumberFormatException e) {
+                            IO.println("fel inmattning. skriv ett nummer");
+                        }
+                    }
 
-                    get_all_bodybooks = "";
+                    get_all_bodymagazines = "";
                     // sätter id som en plus lenghten av hela arraylisten
-                    id = Integer.toString((get_all_bodybooks.length() + 1));
+                    id = Integer.toString((get_all_bodymagazines.length() + 1));
 
                     Magazines magazine = new Magazines(id, title, true, issueNumber, category, publishedYear);
 
