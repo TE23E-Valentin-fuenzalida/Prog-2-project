@@ -24,7 +24,11 @@ public abstract class library {
         return title;
     }
     public boolean getIsAvailable(){
-        return isAvailable;
+        return true;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override

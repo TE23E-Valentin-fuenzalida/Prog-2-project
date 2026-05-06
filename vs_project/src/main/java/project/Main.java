@@ -115,6 +115,32 @@ public class Main {
                             IO.print(magazines);
                         }
                     }
+                    else{
+                        IO.println("Du har inte hämtat något från severn");
+                    }
+                    break;
+                case "4":
+                    // frågar användaren av olika egenskaper
+                    IO.println("titel: ");
+                    String title = IO.readln();
+
+                    IO.println("författare namn: ");
+                    String författare = IO.readln();
+
+
+                    IO.println("genre (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
+                    String genre = IO.readln();
+
+                    String pages = IO.readln();
+
+                    get_all_bodybooks = "";
+                    // sätter id som en plus lenghten av hela arraylisten
+                    String id = Integer.toString((get_all_bodybooks.length() + 1));
+
+                    Books book = new Books(id, title, true, författare, genre, pages);
+
+                    bokLista.add(book);
+
                     break;
 
                 default:
