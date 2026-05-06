@@ -131,7 +131,8 @@ public class Main {
                     IO.println("genre (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
                     String genre = IO.readln();
 
-                    String pages = IO.readln();
+                    IO.println("Sidor");
+                    int pages = Integer.parseInt(IO.readln());
 
                     get_all_bodybooks = "";
                     // sätter id som en plus lenghten av hela arraylisten
@@ -140,9 +141,30 @@ public class Main {
                     Books book = new Books(id, title, true, författare, genre, pages);
 
                     bokLista.add(book);
-
                     break;
+                case "5":
+                    // frågar användaren av olika egenskaper
+                    IO.println("Titel: ");
+                    title = IO.readln();
 
+                    IO.println("IssueNumber: ");
+                    int issueNumber = Integer.parseInt(IO.readln());
+
+
+                    IO.println("Category");
+                    String category = IO.readln();
+
+                    IO.println("Published Year: ");
+                    int publishedYear = Integer.parseInt(IO.readln());
+
+                    get_all_bodybooks = "";
+                    // sätter id som en plus lenghten av hela arraylisten
+                    id = Integer.toString((get_all_bodybooks.length() + 1));
+
+                    Magazines magazine = new Magazines(id, title, true, issueNumber, category, publishedYear);
+
+                    magazinesLista.add(magazine);
+                    break;
                 default:
                     break;
             }

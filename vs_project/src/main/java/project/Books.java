@@ -7,10 +7,10 @@ public class Books extends library{
     // variabler för Books
     private String author;
     private String genre;
-    private String pages;
+    private int pages;
     
     // konstruktor för Books
-    public Books(String id, String title, boolean isAvailable, String author, String genre, String pages){
+    public Books(String id, String title, boolean isAvailable, String author, String genre, int pages){
         super(id, title, isAvailable);
         this.author=author;
         this.genre=genre;
@@ -23,7 +23,7 @@ public class Books extends library{
     public String getGenre() {
         return genre;
     }
-    public String getPages() {
+    public int getPages() {
         return pages;
     }
 
@@ -34,7 +34,7 @@ public class Books extends library{
     public void setGenre(String genre) {
         this.genre = genre;
     }
-    public void setPages(String pages) {
+    public void setPages(int pages) {
         this.pages = pages;
     }
 
