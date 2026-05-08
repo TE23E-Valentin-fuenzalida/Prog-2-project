@@ -37,7 +37,7 @@ public class Main {
         ArrayList<Magazines> magazinesLista = new ArrayList<>();
         ArrayList<Books> bokLista = new ArrayList<>();
 
-        // baseURL för webbsidan
+        // URL för books och magazines
         String booksURL = "http://10.151.168.5:3148/books";
         String magazineURL = "http://10.151.168.5:3148/magazines";
         Gson gson = new Gson();

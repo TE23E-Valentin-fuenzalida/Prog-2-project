@@ -29,7 +29,7 @@ public class BooksList {
     private ArrayList<Books> listBooks = new ArrayList<>();
     Gson gson = new Gson();
 
-    public void get_allbooks() {
+    public void get_allBooks() {
 
         HttpResponse<String> get_all_ResponseBooks;
         // hämtar URL och lagrar den i
@@ -50,9 +50,5 @@ public class BooksList {
         Type postListType1 = new TypeToken<ArrayList<Books>>() {
         }.getType();
         listBooks = gson.fromJson(get_all_bodybooks, postListType1);
-    }
-
-    public void lägg_till(){
-        
     }
 }
