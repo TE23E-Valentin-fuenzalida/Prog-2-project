@@ -29,24 +29,24 @@ public class MagazinesList {
     Gson gson = new Gson();
 
     public void get_allMagazines() {
-    HttpResponse<String> get_all_ResponseMagazines;
-                    try {
-                        get_all_ResponseMagazines = Unirest.get(Main.baseURL+"magazines").asString();
-                    } catch (Exception e) {
-                        IO.println("Undantag uppkoppling " + e.getLocalizedMessage());
-                        return;
-                    }
-                    // kontrollera om servern svarade med "200 OK"
-                    int status = get_all_ResponseMagazines.getStatus();
-                    if (status != 200) {
-                        IO.println("Fel från servern, statuskod: " + status);
-                        return;
-                    }
-                    // gör om resposnseMagazines till en String
-                    String get_all_bodymagazines = get_all_ResponseMagazines.getBody();
-                    // omvandla json-text till i ArrayList med bok-objekt
-                    Type postListType2 = new TypeToken<ArrayList<Magazines>>() {
-                    }.getType();
-                listMagazines = gson.fromJson(get_all_bodymagazines, postListType2);
+        HttpResponse<String> get_all_ResponseMagazines;
+        try {
+            get_all_ResponseMagazines = Unirest.get(Main.baseURL + "magazines").asString();
+        } catch (Exception e) {
+            IO.println("Undantag uppkoppling " + e.getLocalizedMessage());
+            return;
+        }
+        // kontrollera om servern svarade med "200 OK"
+        int status = get_all_ResponseMagazines.getStatus();
+        if (status != 200) {
+            IO.println("Fel från servern, statuskod: " + status);
+            return;
+        }
+        // gör om resposnseMagazines till en String
+        String get_all_bodymagazines = get_all_ResponseMagazines.getBody();
+        // omvandla json-text till i ArrayList med bok-objekt
+        Type postListType2 = new TypeToken<ArrayList<Magazines>>() {
+        }.getType();
+        listMagazines = gson.fromJson(get_all_bodymagazines, postListType2);
     }
 }
