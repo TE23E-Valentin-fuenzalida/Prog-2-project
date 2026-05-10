@@ -51,4 +51,33 @@ public class UsersList {
         }.getType();
         listUsers = gson.fromJson(get_all_bodyUsers, postListType1);
     }
+
+    public void LäggTill(){
+         // frågar användaren av olika egenskaper
+        IO.println("Name: ");
+        String name = IO.readln();
+
+        IO.println("Email (med @gmail.com): ");
+        String email = IO.readln();
+
+        String get_all_bodyUsers = "";
+        // sätter id som en plus lenghten av hela arraylisten
+        String id = Integer.toString((get_all_bodyUsers.length() + 1));
+
+        Users User = new Users(id, name, email);
+
+        listUsers.add(User);
+
+                // sparar informationen på servern
+        HttpResponse<String> Lägg_Till_ResponseUser;
+        try {
+            Lägg_Till_ResponseUser = Unirest.post(Main.baseURL+"users")
+                    .header("Content-Type", "application/json") // VIktigt
+                    .body(User) // Skickar data
+                    .asString(); // Returnerar ett HTTPResponse<String>
+        } catch (UnirestException e) {
+            IO.println("Undantag uppkoppling: " + e.getLocalizedMessage());
+            return;
+        }
+    }
 }
