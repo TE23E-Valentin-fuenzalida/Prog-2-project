@@ -57,7 +57,7 @@ public class UsersList {
         IO.println("Name: ");
         String name = IO.readln();
 
-        IO.println("Email (med @gmail.com): ");
+        IO.println("Email (med @skola.se): ");
         String email = IO.readln();
 
         String get_all_bodyUsers = "";
@@ -80,4 +80,30 @@ public class UsersList {
             return;
         }
     }
+
+        public Users Sök(){
+         IO.println("Säg email för den kund du vill hitta (med @skola.se): ");
+        String email = IO.readln().trim().toLowerCase();
+        try {
+            // Skickar ett GET anrop till servern för att hämta en avstängd med en viss userid
+            HttpResponse<Users> response = Unirest.get(Main.baseURL+"users/email/"+email)
+            // försöker omvandla svaret till ett Books-object
+            .asObject(Users.class);
+            
+            // kollar om servern svarade "200 OK" 
+            if (response.getStatus()==200) {
+                // hämtar själva body från servern
+                Users User = response.getBody();
+                //skriver ut boken
+                IO.println("Den boken du hittade är "+User);
+                return User;
+            }
+            IO.println("Boken hittades inte.");
+            return null;
+        } catch (UnirestException e) {
+            IO.println("Fel vid sökning: "+e.getMessage());
+            return null;
+        }
+    }
+
 }
