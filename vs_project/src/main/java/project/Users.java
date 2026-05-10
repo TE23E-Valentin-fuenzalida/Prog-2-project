@@ -1,6 +1,6 @@
 package project;
 
-public class Users {
+public class Users implements Comparable<Users>{
     private String id;
     private String name;
     private String email;
@@ -34,5 +34,9 @@ public class Users {
     @Override
     public String toString() {
         return "\n"+"id: "+id+"\n"+"namn: "+name+"\n"+"email: "+email;
+    }
+    @Override
+    public int compareTo(Users o) {
+        return this.name.compareToIgnoreCase(o.name);
     }
 }

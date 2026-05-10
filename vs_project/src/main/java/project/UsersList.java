@@ -134,4 +134,8 @@ public class UsersList {
             IO.println("Något gick fel. Statuskod: " + deleteStatus);
         }
     }
+
+    public void sortera(){
+
+    }
 }

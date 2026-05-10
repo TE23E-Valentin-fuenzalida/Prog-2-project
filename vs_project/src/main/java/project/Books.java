@@ -3,7 +3,7 @@ package project;
 Valentin fuenzalida ribbing
 Books innehåller variabler med en konstuktor, setters och getters.
 */
-public class Books extends library{
+public class Books extends library implements Comparable<Books>{
     // variabler för Books
     private String author;
     private String genre;
@@ -41,5 +41,9 @@ public class Books extends library{
      @Override
     public String toString() {
         return "\n"+"id: "+id+"\n title: "+title+"\n author: "+author+"\n genre: "+genre+"\n pages: "+pages+"\n isAvailable: "+isAvailable+"\n";
+    }
+    @Override
+    public int compareTo(Books o) {
+        return this.title.compareToIgnoreCase(o.title);
     }
 }

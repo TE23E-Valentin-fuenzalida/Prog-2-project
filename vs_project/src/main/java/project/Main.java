@@ -58,41 +58,76 @@ public class Main {
 
             switch (val) {
                 case "1":
+                    IO.println("Vill du hämta ut alla böcker, tidningar, kunder eller avstängda (b, t, k eller a)");
+                    String svar = IO.readln();
+                    if (svar == "b") {
+                        listBooks.get_allBooks();
+                    }
+                    else if (svar == "t") {
+                        listMagazines.get_allMagazines();
+                    } else if (svar == "k") {
+                        listUsers.get_allUsers();
+                    } else if (svar == "a") {
+                        listSuspendedUsers.get_allSuspendedUsers();
+                    }
                     break;
                 case "2":
+                    IO.println("Vill du hämta ut en bok, tidning, kund eller avstängd (b, t, k eller a): ");
+                    String svar1 = IO.readln().toLowerCase().trim();
+                    if (svar1 == "b") {
+                        listBooks.Sök();
+                    }
+                    else if (svar1 == "t") {
+                        listMagazines.Sök();
+                    } else if (svar1 == "k") {
+                        listUsers.Sök();
+                    } else if (svar1 == "a") {
+                        listSuspendedUsers.Sök();
+                    }
                     break;
                 case "3":
+                    IO.println("Vill du skapa en ny bok, tidning, kund eller avstängd (b, t, k eller a): ");
+                    String svar2 = IO.readln().toLowerCase().trim();
+                    if (svar2 == "b") {
+                        listBooks.LäggTill();
+                    } else if (svar2 == "t") {
+                        listMagazines.LäggTill();
+                    } else if (svar2 == "k") {
+                        listUsers.LäggTill();
+                    } else if (svar2 == "a") {
+                        listSuspendedUsers.LäggTill();
+                    }
                     break;
                 case "4":
                     listUsers.Sök();
                     break;
                 case "5":
                     IO.println("Vill du hita bok eller tidning (b eller t): ");
-                    String svar = IO.readln();
-                    if (svar == "b") {
+                    String svar3 = IO.readln().toLowerCase().trim();
+                    if (svar3 == "b") {
                         listBooks.Sök();
                     }
-                    else if (svar == "t") {
+                    else if (svar3 == "t") {
                         listMagazines.Sök();
                     }
                     break;
                 case "6":
                     IO.println("vill du ta bort bok eller tidning (b eller t): ");
-                    String svar1 = IO.readln();
-                    if (svar1 == "b") {
+                    String svar4 = IO.readln().toLowerCase().trim();
+                    if (svar4 == "b") {
                         listBooks.TaBort();
                     }
-                    else if (svar1 == "t") {
+                    else if (svar4 == "t") {
                         listMagazines.TaBort();
                     }
                     break;
                 case "7":
                     IO.println("Vill du ta bort en kund eller avstängd (k eller a): ");
-                    String svar2 = IO.readln();
-                    if (svar2 == "k") {
+                    String svar5 = IO.readln();
+                    if (svar5 == "k") {
                         listUsers.TaBort();
                     }
-                    else if (svar2 == "a") {
+                    else if (svar5 == "a") {
                         listSuspendedUsers.TaBort();
                     }
                     break;

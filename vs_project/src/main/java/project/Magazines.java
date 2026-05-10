@@ -3,7 +3,7 @@ package project;
 Valentin fuenzalida ribbing
 magazines innehåller variabler med en konstuktor, getters och setters.
 */
-public class Magazines extends library {
+public class Magazines extends library implements Comparable<Magazines>{
     // variabler
     private int issueNumber;
     private String category;
@@ -39,5 +39,9 @@ public class Magazines extends library {
     @Override
     public String toString() {
         return "\n"+ "id: "+id+"\n title: "+title+"\n issueNumber: "+issueNumber+"\n category: "+category+"\n publishedYear: "+publishedYear+"\n isAvailable: "+isAvailable+"\n";
+    }
+    @Override
+    public int compareTo(Magazines o) {
+        return this.title.compareToIgnoreCase(o.title);
     }
 }

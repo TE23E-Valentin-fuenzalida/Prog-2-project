@@ -102,8 +102,8 @@ public class BooksList {
          // hämtar alla users object och lägger de i en lista
         get_allBooks();
 
-        // frågar användaren för email
-        IO.println("Ange titel för tidningen som du vill hitta: ");
+        // frågar användaren för titeln för boken
+        IO.println("Ange titel för boken som du vill hitta: ");
         String titel = IO.readln().trim().toLowerCase();
 
         //loopar igenom listUsers för att hitta ett object med samma email
@@ -147,4 +147,6 @@ public class BooksList {
             IO.println("Något gick fel. Statuskod: " + deleteStatus);
         }
     }
+
+    
 }
