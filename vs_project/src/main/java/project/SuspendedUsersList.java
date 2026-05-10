@@ -68,4 +68,29 @@ public class SuspendedUsersList {
 
         listSuspendedUsers.add(SuspendedUser);
     }
+
+    public SuspendedUsers Sök(){
+         IO.println("Säg id för den avstängda du vill hitta: ");
+        String userid = IO.readln().trim().toLowerCase();
+        try {
+            // Skickar ett GET anrop till servern för att hämta en avstängd med en viss userid
+            HttpResponse<SuspendedUsers> response = Unirest.get(Main.baseURL+"/suspended/userid/"+userid)
+            // försöker omvandla svaret till ett Books-object
+            .asObject(SuspendedUsers.class);
+            
+            // kollar om servern svarade "200 OK" 
+            if (response.getStatus()==200) {
+                // hämtar själva body från servern
+                SuspendedUsers SuspendedUser = response.getBody();
+                //skriver ut boken
+                IO.println("Den boken du hittade är "+SuspendedUser);
+                return SuspendedUser;
+            }
+            IO.println("Boken hittades inte.");
+            return null;
+        } catch (UnirestException e) {
+            IO.println("Fel vid sökning: "+e.getMessage());
+            return null;
+        }
+    }
 }

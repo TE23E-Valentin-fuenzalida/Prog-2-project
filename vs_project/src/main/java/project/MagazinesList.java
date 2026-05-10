@@ -107,7 +107,7 @@ public class MagazinesList {
          IO.println("Säg titeln för tidningen som du vill hitta: ");
         String titel = IO.readln().trim().toLowerCase();
         try {
-            // Skicakr ett GET anrop till servern för att hämta en bok med viss titel
+            // Skickar ett GET anrop till servern för att hämta en tidning med viss titel
             HttpResponse<Magazines> response = Unirest.get(Main.baseURL+"/magazines/titel/"+titel)
             // försöker omvandla svaret till ett Books-object
             .asObject(Magazines.class);

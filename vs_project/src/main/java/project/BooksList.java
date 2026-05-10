@@ -102,7 +102,7 @@ public class BooksList {
         IO.println("Säg titeln som du vill hitta för bokenx: ");
         String titel = IO.readln().trim().toLowerCase();
         try {
-            // Skicakr ett GET anrop till servern för att hämta en bok med viss titel
+            // Skickar ett GET anrop till servern för att hämta en bok med viss titel
             HttpResponse<Books> response = Unirest.get(Main.baseURL + "/books/titel/" + titel)
                     // försöker omvandla svaret till ett Books-object
                     .asObject(Books.class);
