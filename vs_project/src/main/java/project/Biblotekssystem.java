@@ -16,7 +16,7 @@ public class Biblotekssystem {
             4. Hitta bok eller tidning
             5. Ta bort bok  eller tidning
             7. Ta bort kund eller avstängd
-            8. Skriva ut sorterat böcker, kunder, 
+            8. Skriva ut böcker, tidningar, kunder eller avstängda
             9. Avsluta
         """);
         String val = IO.readln();

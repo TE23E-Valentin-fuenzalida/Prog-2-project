@@ -3,6 +3,7 @@ package project;
 public class SuspendedUsers {
     private String id;
     private String userId;
+
     private String reason;
 
     public SuspendedUsers(String id, String userId, String reason) {
@@ -29,5 +30,8 @@ public class SuspendedUsers {
     public void setReason(String reason) {
         this.reason = reason;
     }
-    
+    @Override
+    public String toString() {
+        return "\n"+"id: "+id+"\n"+"userId: "+userId+"\n"+"Reason: "+reason;
+    }
 }

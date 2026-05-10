@@ -30,4 +30,9 @@ public class Users {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "\n"+"id: "+id+"\n"+"namn: "+name+"\n"+"email: "+email;
+    }
 }

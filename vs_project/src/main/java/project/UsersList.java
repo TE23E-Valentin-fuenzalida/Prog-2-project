@@ -81,42 +81,38 @@ public class UsersList {
         }
     }
 
-        public Users Sök(){
-         IO.println("Säg email för den kund du vill hitta (med @skola.se): ");
+        public String Sök(){
+        // hämtar alla users object och lägger de i en lista
+        get_allUsers();
+
+        // frågar användaren för email
+        IO.println("Säg email för den kund du vill hitta (med @skola.se): ");
         String email = IO.readln().trim().toLowerCase();
-        try {
-            // Skickar ett GET anrop till servern för att hämta en avstängd med en viss userid
-            HttpResponse<Users> response = Unirest.get(Main.baseURL+"users/email/"+email)
-            // försöker omvandla svaret till ett Books-object
-            .asObject(Users.class);
-            
-            // kollar om servern svarade "200 OK" 
-            if (response.getStatus()==200) {
-                // hämtar själva body från servern
-                Users User = response.getBody();
-                //skriver ut boken
-                IO.println("Den kund du hittade är "+User);
-                return User;
+
+        //loopar igenom listUsers för att hitta ett object med samma email
+        for (Users user : listUsers) {
+            if (user.getEmail().toLowerCase().equals(email)) {
+                IO.println(user);
+                return user.getId();
             }
-            IO.println("kunden hittades inte.");
-            return null;
-        } catch (UnirestException e) {
-            IO.println("Fel vid sökning: "+e.getMessage());
-            return null;
         }
+
+        
+        IO.println("kunden hittades inte.");
+        return "";
     }
 
     
     public void TaBort(){
-         // hitta boken som ska readeras
-        Users User = Sök();
+         // hitta kunden som ska readeras
+        String id = Sök();
 
-        // om boken inte finns
-        if (User == null) {
-            return;
+        // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
+        for (Users users : listUsers) {
+            if (users.getId().equals(id)) {
+                listUsers.remove(users);
+            }
         }
-        // hämtar id för boken
-        String id = User.getId();
 
         int deleteStatus;
 
@@ -132,8 +128,6 @@ public class UsersList {
         }
         if (deleteStatus == 200) {
             IO.println("Inlägget med ID " + id + " är borttaget");
-            //tar bort boken lokalt
-            listUsers.remove(User);
         } else if (deleteStatus == 204) {
             IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
         } else {

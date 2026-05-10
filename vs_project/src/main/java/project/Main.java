@@ -28,36 +28,32 @@ import java.util.stream.Collectors;
 
 import javax.swing.plaf.FontUIResource;
 
+import org.apache.http.impl.client.BasicCookieStore;
+
 public class Main {
     // baseURL
-    public static final String baseURL = "http://10.151.168.5:3148/";
+/*     public static final String baseURL = "http://10.151.168.5:3148/"; */
+    // baseUrl om jag är hemma
+       public static final String baseURL = "http://localhost:3000/";
     void main() {
 
         // ArrayLists
         ArrayList<Magazines> magazinesLista = new ArrayList<>();
         ArrayList<Books> bokLista = new ArrayList<>();
-
-        // URL för books och magazines
-        String booksURL = "http://10.151.168.5:3148/books";
-        String magazineURL = "http://10.151.168.5:3148/magazines";
+        // skapar ett Gson object
         Gson gson = new Gson();
 
         IO.println("Startar JSON klient");
 
+        // skapar alla object av klasserna som jag använder
+        Biblotekssystem system = new Biblotekssystem();
+        UsersList listUsers = new UsersList();
+        MagazinesList listMagazines = new MagazinesList();
+        BooksList listBooks = new BooksList();
+
         while (true) {
 
-            // meny och användare svarar på den
-            IO.println(
-                    """
-                            välj vad du vill göra
-                                1. Hämta böcker.
-                                2. Hämta tidningar.
-                                3. Skriva ut hämtade böcker eller tidningar på skärmen
-                                4. Lägg till bok.
-                                5. Lägg till tidning.
-                                6. Avsluta
-                                """);
-            String val = IO.readln();
+            String val = system.meny();
 
             switch (val) {
                 case "1":
@@ -65,24 +61,17 @@ public class Main {
                 case "2":
                     break;
                 case "3":
-                    IO.println("vill du skriva ut books eller magazines (b eller m): ");
-                    String svar = IO.readln();
-
-                    if (svar.equalsIgnoreCase("b")) {
-                        for (Books boks : bokLista) {
-                            IO.print(boks);
-                        }
-                    }
-                    if (svar.equalsIgnoreCase("m")) {
-                        for (Magazines magazines : magazinesLista) {
-                            IO.print(magazines);
-                        }
-                    }
-                    else{
-                        IO.println("Du har inte hämtat något från i lager");
-                    }
+                    listUsers.Sök();
                     break;
                 case "4":
+                    IO.println("Vill du hita bok eller tidning (b eller t): ");
+                    String svar = IO.readln();
+                    if (svar == "b") {
+                        listBooks.Sök();
+                    }
+                    else if (svar == "t") {
+                        listMagazines.Sök();
+                    }
                     break;
                 case "5":
                     break;
