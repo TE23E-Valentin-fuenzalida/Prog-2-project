@@ -51,4 +51,41 @@ public class BooksList {
         }.getType();
         listBooks = gson.fromJson(get_all_bodybooks, postListType1);
     }
+
+    public void LäggTill(){
+        // frågar användaren av olika egenskaper
+                    IO.println("titel: ");
+                    String title = IO.readln();
+
+                    IO.println("författare namn: ");
+                    String författare = IO.readln();
+
+
+                    IO.println("genre (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
+                    String genre = IO.readln();
+
+                    int pages = 0;
+                    while (true) {
+                        IO.println("Sidor");
+                        String sidor = IO.readln();
+                        try {
+                            pages = Integer.parseInt(sidor);
+                            break;
+                        } catch (NumberFormatException e) {
+                            IO.println("fel inmattning. skriv ett nummer");
+                        }
+                    }
+
+                    String get_all_bodybooks = "";
+                    // sätter id som en plus lenghten av hela arraylisten
+                    String id = Integer.toString((get_all_bodybooks.length() + 1));
+
+                    Books book = new Books(id, title, true, författare, genre, pages);
+
+                    listBooks.add(book);
+    }
+
+    public void TaBort(){
+        // frågar användaren om titlen för 
+    }
 }

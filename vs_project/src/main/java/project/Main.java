@@ -118,7 +118,7 @@ public class Main {
                         }
                     }
                     else{
-                        IO.println("Du har inte hämtat något från severn");
+                        IO.println("Du har inte hämtat något från i lager");
                     }
                     break;
                 case "4":
