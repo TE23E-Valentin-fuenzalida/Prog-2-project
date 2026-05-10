@@ -101,6 +101,30 @@ public class MagazinesList {
             IO.println("Undantag uppkoppling: " + e.getLocalizedMessage());
             return;
         }
+    }
 
+    public Magazines Sök(){
+         IO.println("Säg titeln som du vill hitta för tidningen du vill: ");
+        String titel = IO.readln().trim().toLowerCase();
+        try {
+            // Skicakr ett GET anrop till servern för att hämta en bok med viss titel
+            HttpResponse<Magazines> response = Unirest.get(Main.baseURL+"/magazines/titel/"+titel)
+            // försöker omvandla svaret till ett Books-object
+            .asObject(Magazines.class);
+            
+            // kollar om servern svarade "200 OK" 
+            if (response.getStatus()==200) {
+                // hämtar själva body från servern
+                Magazines magazine = response.getBody();
+                //skriver ut boken
+                IO.println("Den boken du hittade är "+magazine);
+                return magazine;
+            }
+            IO.println("Boken hittades inte.");
+            return null;
+        } catch (UnirestException e) {
+            IO.println("Fel vid sökning: "+e.getMessage());
+            return null;
+        }
     }
 }

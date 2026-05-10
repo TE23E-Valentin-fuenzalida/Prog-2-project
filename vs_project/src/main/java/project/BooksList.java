@@ -86,7 +86,7 @@ public class BooksList {
         HttpResponse<String> Lägg_Till_ResponseBooks;
 
         // sparar informationen på servern
-        try{
+        try {
             Lägg_Till_ResponseBooks = Unirest.post(Main.baseURL)
                     .header("Content-Type", "application/json") // VIktigt
                     .body(book) // Skickar data
@@ -98,35 +98,35 @@ public class BooksList {
 
     }
 
-    public Books Sök(){
-        IO.println("Säg titeln som du vill hitta för boken");
+    public Books Sök() {
+        IO.println("Säg titeln som du vill hitta för bokenx: ");
         String titel = IO.readln().trim().toLowerCase();
         try {
             // Skicakr ett GET anrop till servern för att hämta en bok med viss titel
-            HttpResponse<Books> response = Unirest.get(Main.baseURL+"/Books/titel/"+titel)
-            // försöker omvandla svaret till ett Books-object
-            .asObject(Books.class);
-            
-            // kollar om servern svarade "200 OK" 
-            if (response.getStatus()==200) {
+            HttpResponse<Books> response = Unirest.get(Main.baseURL + "/books/titel/" + titel)
+                    // försöker omvandla svaret till ett Books-object
+                    .asObject(Books.class);
+
+            // kollar om servern svarade "200 OK"
+            if (response.getStatus() == 200) {
                 // hämtar själva body från servern
                 Books bok = response.getBody();
-                //skriver ut boken
-                IO.println("Den boken du hittade är "+bok);
+                // skriver ut boken
+                IO.println("Den boken du hittade är " + bok);
                 return bok;
             }
             IO.println("Boken hittades inte.");
             return null;
         } catch (UnirestException e) {
-            IO.println("Fel vid sökning: "+e.getMessage());
+            IO.println("Fel vid sökning: " + e.getMessage());
             return null;
         }
-        }
+    }
 
     public void TaBort() {
         // hitta boken som ska readeras
         Books bok = Sök();
-        
+
         // om boken inte finns
         if (bok == null) {
             return;
@@ -138,7 +138,8 @@ public class BooksList {
 
         // ta bort från servern
         try {
-            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen body)
+            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen
+            // body)
             deleteStatus = Unirest.delete(Main.baseURL + "/Books/" + id)
                     .asEmpty() // Skickar INGEN body
                     .getStatus();
