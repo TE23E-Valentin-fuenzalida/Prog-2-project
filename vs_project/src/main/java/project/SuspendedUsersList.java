@@ -95,10 +95,10 @@ public class SuspendedUsersList {
                 // hämtar själva body från servern
                 SuspendedUsers SuspendedUser = response.getBody();
                 //skriver ut boken
-                IO.println("Den boken du hittade är "+SuspendedUser);
+                IO.println("Den avstängda du hittade är "+SuspendedUser);
                 return SuspendedUser;
             }
-            IO.println("Boken hittades inte.");
+            IO.println("avstängda hittades inte.");
             return null;
         } catch (UnirestException e) {
             IO.println("Fel vid sökning: "+e.getMessage());
@@ -110,8 +110,6 @@ public class SuspendedUsersList {
     public void TaBort(){
          // hitta boken som ska readeras
         SuspendedUsers SuspendedUser = Sök();
-        // tar bort objectet från arraylistan
-        listSuspendedUsers.remove(SuspendedUser);
 
         // om boken inte finns
         if (SuspendedUser == null) {
@@ -133,11 +131,11 @@ public class SuspendedUsersList {
             return;
         }
         if (deleteStatus == 200) {
-            IO.println("Inlägget med TITELN " + id + " är borttaget");
-            //tar bort boken lokalt
+            IO.println("Inlägget med ID " + id + " är borttaget");
+            //tar bort avstängda lokalt
             listSuspendedUsers.remove(SuspendedUser);
         } else if (deleteStatus == 204) {
-            IO.println("Inlägget fanns inte kvar / Inget innehåll på titeln=" + id);
+            IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
         } else {
             IO.println("Något gick fel. Statuskod: " + deleteStatus);
         }

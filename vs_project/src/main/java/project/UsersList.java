@@ -95,10 +95,10 @@ public class UsersList {
                 // hämtar själva body från servern
                 Users User = response.getBody();
                 //skriver ut boken
-                IO.println("Den boken du hittade är "+User);
+                IO.println("Den kund du hittade är "+User);
                 return User;
             }
-            IO.println("Boken hittades inte.");
+            IO.println("kunden hittades inte.");
             return null;
         } catch (UnirestException e) {
             IO.println("Fel vid sökning: "+e.getMessage());
@@ -106,4 +106,38 @@ public class UsersList {
         }
     }
 
+    
+    public void TaBort(){
+         // hitta boken som ska readeras
+        Users User = Sök();
+
+        // om boken inte finns
+        if (User == null) {
+            return;
+        }
+        // hämtar id för boken
+        String id = User.getId();
+
+        int deleteStatus;
+
+        // ta bort från servern
+        try {
+            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen body)
+            deleteStatus = Unirest.delete(Main.baseURL + "users/" + id)
+                    .asEmpty() // Skickar INGEN body
+                    .getStatus();
+        } catch (UnirestException e) {
+            IO.println("Undantag uppkoppling: " + e.getLocalizedMessage());
+            return;
+        }
+        if (deleteStatus == 200) {
+            IO.println("Inlägget med ID " + id + " är borttaget");
+            //tar bort boken lokalt
+            listUsers.remove(User);
+        } else if (deleteStatus == 204) {
+            IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
+        } else {
+            IO.println("Något gick fel. Statuskod: " + deleteStatus);
+        }
+    }
 }

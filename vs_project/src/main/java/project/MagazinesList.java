@@ -117,10 +117,10 @@ public class MagazinesList {
                 // hämtar själva body från servern
                 Magazines magazine = response.getBody();
                 //skriver ut boken
-                IO.println("Den boken du hittade är "+magazine);
+                IO.println("Den tidningen du hittade är "+magazine);
                 return magazine;
             }
-            IO.println("Boken hittades inte.");
+            IO.println("tidningen hittades inte.");
             return null;
         } catch (UnirestException e) {
             IO.println("Fel vid sökning: "+e.getMessage());
@@ -152,11 +152,11 @@ public class MagazinesList {
             return;
         }
         if (deleteStatus == 200) {
-            IO.println("Inlägget med TITELN " + id + " är borttaget");
+            IO.println("Inlägget med ID " + id + " är borttaget");
             //tar bort Magazinet lokalt
             listMagazines.remove(magazine);
         } else if (deleteStatus == 204) {
-            IO.println("Inlägget fanns inte kvar / Inget innehåll på titeln=" + id);
+            IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
         } else {
             IO.println("Något gick fel. Statuskod: " + deleteStatus);
         }

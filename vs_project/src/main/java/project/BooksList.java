@@ -147,11 +147,11 @@ public class BooksList {
             return;
         }
         if (deleteStatus == 200) {
-            IO.println("Inlägget med TITELN " + id + " är borttaget");
+            IO.println("Inlägget med ID " + id + " är borttaget");
             //tar bort boken lokalt
             listBooks.remove(bok);
         } else if (deleteStatus == 204) {
-            IO.println("Inlägget fanns inte kvar / Inget innehåll på titeln=" + id);
+            IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
         } else {
             IO.println("Något gick fel. Statuskod: " + deleteStatus);
         }
