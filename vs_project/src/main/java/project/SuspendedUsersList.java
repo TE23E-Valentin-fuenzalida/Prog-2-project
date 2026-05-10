@@ -67,6 +67,18 @@ public class SuspendedUsersList {
         SuspendedUsers SuspendedUser = new SuspendedUsers(id, userId, reason);
 
         listSuspendedUsers.add(SuspendedUser);
+
+                // sparar informationen på servern
+        HttpResponse<String> Lägg_Till_ResponseSuspendedUser;
+        try {
+            Lägg_Till_ResponseSuspendedUser = Unirest.post(Main.baseURL+"suspended")
+                    .header("Content-Type", "application/json") // VIktigt
+                    .body(SuspendedUser) // Skickar data
+                    .asString(); // Returnerar ett HTTPResponse<String>
+        } catch (UnirestException e) {
+            IO.println("Undantag uppkoppling: " + e.getLocalizedMessage());
+            return;
+        }
     }
 
     public SuspendedUsers Sök(){
@@ -74,7 +86,7 @@ public class SuspendedUsersList {
         String userid = IO.readln().trim().toLowerCase();
         try {
             // Skickar ett GET anrop till servern för att hämta en avstängd med en viss userid
-            HttpResponse<SuspendedUsers> response = Unirest.get(Main.baseURL+"/suspended/userid/"+userid)
+            HttpResponse<SuspendedUsers> response = Unirest.get(Main.baseURL+"suspended/userid/"+userid)
             // försöker omvandla svaret till ett Books-object
             .asObject(SuspendedUsers.class);
             
@@ -91,6 +103,43 @@ public class SuspendedUsersList {
         } catch (UnirestException e) {
             IO.println("Fel vid sökning: "+e.getMessage());
             return null;
+        }
+    }
+
+    
+    public void TaBort(){
+         // hitta boken som ska readeras
+        SuspendedUsers SuspendedUser = Sök();
+        // tar bort objectet från arraylistan
+        listSuspendedUsers.remove(SuspendedUser);
+
+        // om boken inte finns
+        if (SuspendedUser == null) {
+            return;
+        }
+        // hämtar id för boken
+        String id = SuspendedUser.getId();
+
+        int deleteStatus;
+
+        // ta bort från servern
+        try {
+            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen body)
+            deleteStatus = Unirest.delete(Main.baseURL + "suspended/" + id)
+                    .asEmpty() // Skickar INGEN body
+                    .getStatus();
+        } catch (UnirestException e) {
+            IO.println("Undantag uppkoppling: " + e.getLocalizedMessage());
+            return;
+        }
+        if (deleteStatus == 200) {
+            IO.println("Inlägget med TITELN " + id + " är borttaget");
+            //tar bort boken lokalt
+            listSuspendedUsers.remove(SuspendedUser);
+        } else if (deleteStatus == 204) {
+            IO.println("Inlägget fanns inte kvar / Inget innehåll på titeln=" + id);
+        } else {
+            IO.println("Något gick fel. Statuskod: " + deleteStatus);
         }
     }
 }

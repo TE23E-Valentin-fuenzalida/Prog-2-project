@@ -93,7 +93,7 @@ public class MagazinesList {
         // sparar informationen på servern
         HttpResponse<String> Lägg_Till_ResponseMagazines;
         try {
-            Lägg_Till_ResponseMagazines = Unirest.post(Main.baseURL)
+            Lägg_Till_ResponseMagazines = Unirest.post(Main.baseURL+"magazines")
                     .header("Content-Type", "application/json") // VIktigt
                     .body(magazine) // Skickar data
                     .asString(); // Returnerar ett HTTPResponse<String>
@@ -108,7 +108,7 @@ public class MagazinesList {
         String titel = IO.readln().trim().toLowerCase();
         try {
             // Skickar ett GET anrop till servern för att hämta en tidning med viss titel
-            HttpResponse<Magazines> response = Unirest.get(Main.baseURL+"/magazines/titel/"+titel)
+            HttpResponse<Magazines> response = Unirest.get(Main.baseURL+"magazines/titel/"+titel)
             // försöker omvandla svaret till ett Books-object
             .asObject(Magazines.class);
             
@@ -144,7 +144,7 @@ public class MagazinesList {
         // ta bort från servern
         try {
             // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen body)
-            deleteStatus = Unirest.delete(Main.baseURL + "/Books/" + id)
+            deleteStatus = Unirest.delete(Main.baseURL + "magazines/" + id)
                     .asEmpty() // Skickar INGEN body
                     .getStatus();
         } catch (UnirestException e) {
@@ -153,6 +153,8 @@ public class MagazinesList {
         }
         if (deleteStatus == 200) {
             IO.println("Inlägget med TITELN " + id + " är borttaget");
+            //tar bort Magazinet lokalt
+            listMagazines.remove(magazine);
         } else if (deleteStatus == 204) {
             IO.println("Inlägget fanns inte kvar / Inget innehåll på titeln=" + id);
         } else {

@@ -87,7 +87,7 @@ public class BooksList {
 
         // sparar informationen på servern
         try {
-            Lägg_Till_ResponseBooks = Unirest.post(Main.baseURL)
+            Lägg_Till_ResponseBooks = Unirest.post(Main.baseURL+"books")
                     .header("Content-Type", "application/json") // VIktigt
                     .body(book) // Skickar data
                     .asString(); // Returnerar ett HTTPResponse<String>
@@ -103,7 +103,7 @@ public class BooksList {
         String titel = IO.readln().trim().toLowerCase();
         try {
             // Skickar ett GET anrop till servern för att hämta en bok med viss titel
-            HttpResponse<Books> response = Unirest.get(Main.baseURL + "/books/titel/" + titel)
+            HttpResponse<Books> response = Unirest.get(Main.baseURL + "books/titel/" + titel)
                     // försöker omvandla svaret till ett Books-object
                     .asObject(Books.class);
 
@@ -139,7 +139,7 @@ public class BooksList {
         // ta bort från servern
         try {
             // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen body)
-            deleteStatus = Unirest.delete(Main.baseURL + "/Books/" + id)
+            deleteStatus = Unirest.delete(Main.baseURL + "books/" + id)
                     .asEmpty() // Skickar INGEN body
                     .getStatus();
         } catch (UnirestException e) {
@@ -148,6 +148,8 @@ public class BooksList {
         }
         if (deleteStatus == 200) {
             IO.println("Inlägget med TITELN " + id + " är borttaget");
+            //tar bort boken lokalt
+            listBooks.remove(bok);
         } else if (deleteStatus == 204) {
             IO.println("Inlägget fanns inte kvar / Inget innehåll på titeln=" + id);
         } else {
