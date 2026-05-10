@@ -86,6 +86,7 @@ public class BooksList {
     }
 
     public void TaBort(){
-        // frågar användaren om titlen för 
+        // frågar användaren om titlen för boken hen vill ta bort
+        IO.println("Ange titeln för boken du vill ta bort");
     }
 }
