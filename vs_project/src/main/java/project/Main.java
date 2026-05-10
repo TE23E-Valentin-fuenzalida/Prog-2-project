@@ -51,72 +51,72 @@ public class Main {
             switch (val1) {
                 case "1":
                     String val2 = system.hämtaUtAllaMeny();
-                    if (val2 == "1") {
+                    if (val2.equals("1")) {
                         listBooks.get_allBooks();
                     }
-                    else if (val2 == "2") {
+                    else if (val2.equals("2")) {
                         listMagazines.get_allMagazines();
-                    } else if (val2 == "3") {
+                    } else if (val2.equals("3")) {
                         listUsers.get_allUsers();
-                    } else if (val2 == "4") {
+                    } else if (val2.equals("4")) {
                         listSuspendedUsers.get_allSuspendedUsers();
                     }
                     break;
                 case "2":
                     String val3 = system.hämtaUtEnMeny();
-                    if (val3 == "1") {
+                    if (val3.equals("1")) {
                         listBooks.Sök();
                     }
-                    else if (val3 == "2") {
+                    else if (val3.equals("2")) {
                         listMagazines.Sök();
-                    } else if (val3 == "2") {
+                    } else if (val3.equals("3")) {
                         listUsers.Sök();
-                    } else if (val3 == "2") {
+                    } else if (val3.equals("4")) {
                         listSuspendedUsers.Sök();
                     }
                     break;
                 case "3":
                     String val4 = system.SkapaNyttMeny();
-                    if (val4 == "1") {
+                    if (val4.equals("1")) {
                         listBooks.LäggTill();
-                    } else if (val4 == "2") {
+                    } else if (val4.equals("2")) {
                         listMagazines.LäggTill();
-                    } else if (val4 == "3") {
+                    } else if (val4.equals("3")) {
                         listUsers.LäggTill();
-                    } else if (val4 == "4") {
+                    } else if (val4.equals("4")) {
                         listSuspendedUsers.LäggTill();
                     }
                     break;
                 case "4":
                     String val5 = system.SökaMeny();
-                    if (val5 == "1") {
+                    if (val5.equals("1")) {
                         listBooks.Sök();
-                    } else if (val5 == "2") {
+                    } else if (val5.equals("2")) {
                             listMagazines.Sök();
-                    } else if (val5 == "3") {
+                    } else if (val5.equals("3")) {
                             listUsers.Sök();
                     }
                     break;
                 case "5":
                     String val6 = system.TabortMeny();
-                    if (val6 == "1") {
+                    if (val6.equals("1")) {
                         listBooks.TaBort();
                     }
-                    else if (val6 == "2") {
+                    else if (val6.equals("2")) {
                         listMagazines.TaBort();
-                    } else if (val6 == "3") {
+                    } else if (val6.equals("3")) {
                         listUsers.TaBort();
-                    } else if (val6 == "4") {
+                    } else if (val6.equals("4")) {
                         listSuspendedUsers.TaBort();
                     }
                     break;
                 case "6":
                     String val7 = system.SkriaUtMeny();
-                    if (val7 == "1") {
+                    if (val7.equals("1")) {
                         listBooks.Sortera();
-                    } else if (val7 == "2") {
+                    } else if (val7.equals("2")) {
                         listMagazines.Sortera();
-                    } else if (val7 == "3") {
+                    } else if (val7.equals("3")) {
                         listUsers.Sortera();
                     }
                 case "7":
@@ -135,7 +135,7 @@ public class Main {
         listSuspendedUsers.get_allSuspendedUsers();
         // frågar användaren för ett id för en kund
         IO.println("Skriv namnet på kunden: ");
-        String namn = IO.readln().toLowerCase().trim();
+        String namn = IO.readln().toLowerCase();
 
         //loopar igenom listUsers för att hitta ett object med samma namn
         for (Users user : listUsers.getListUsers()) {
@@ -144,7 +144,7 @@ public class Main {
                 String id = user.getId();
                 // loopar igenom suspendedUsers list för att kolla om någon av id matchar id för kunden
                 for (SuspendedUsers suspendedUser : listSuspendedUsers.getListSuspendedUsers()) {
-                    if (suspendedUser.getUserId().equals(id)) {
+                    if (id.equals(suspendedUser.getUserId())) {
                         IO.println("Kunden är avstängd");
                         return;
                     }
