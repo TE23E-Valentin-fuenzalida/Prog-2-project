@@ -10,13 +10,13 @@ public class Biblotekssystem {
         IO.println(
         """
         välj vad du vill göra
-            1. Hämta alla böcker, tidning, användare eller avstängda
-            2. Skapa ny bok, tidning, användare eller avstängd
+            1. Hämta alla böcker, tidning, kunder eller avstängda
+            2. Skapa ny bok, tidning, kunder eller avstängd
             3. Hitta kund
             4. Hitta bok eller tidning
             5. Ta bort bok  eller tidning
             7. Ta bort kund eller avstängd
-            8. Skriva ut sorterat 
+            8. Skriva ut sorterat böcker, kunder, 
             9. Avsluta
         """);
         String val = IO.readln();
@@ -24,6 +24,7 @@ public class Biblotekssystem {
         return val;
     }
 
-    
-
+    public void SuspendedUsers(){
+        
+    }
 }
