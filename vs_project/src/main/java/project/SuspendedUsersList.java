@@ -51,4 +51,21 @@ public class SuspendedUsersList {
         }.getType();
         listSuspendedUsers = gson.fromJson(get_all_bodySuspendedUsers, postListType1);
     }
+
+    public void LäggTill(){
+         // frågar användaren av olika egenskaper
+        IO.println("user Id: ");
+        String userId = IO.readln();
+
+        IO.println("Reason: ");
+        String reason = IO.readln();
+
+        String get_all_bodySuspendedUsers = "";
+        // sätter id som en plus lenghten av hela arraylisten
+        String id = Integer.toString((get_all_bodySuspendedUsers.length() + 1));
+
+        SuspendedUsers SuspendedUser = new SuspendedUsers(id, userId, reason);
+
+        listSuspendedUsers.add(SuspendedUser);
+    }
 }
