@@ -141,6 +141,14 @@ public class Main {
                     } else if (svar6 == "k") {
                         listUsers.Sortera();
                     }
+                case "9":
+                    IO.println("De här användare får låna");
+                    IO.println();
+                    listUsers.Sortera();
+                    IO.println();
+                    IO.println("De här användare för inte låna");
+                    IO.println();
+                    listSuspendedUsers.Skriva_ut();
                     break;
                 default:
                     break;

@@ -46,7 +46,7 @@ public class MagazinesList {
         }
         // gör om resposnseMagazines till en String
         String get_all_bodymagazines = get_all_ResponseMagazines.getBody();
-        // omvandla json-text till i ArrayList med bok-objekt
+        // omvandla json-text till i ArrayList med Magazines-objekt
         Type postListType2 = new TypeToken<ArrayList<Magazines>>() {
         }.getType();
         listMagazines = gson.fromJson(get_all_bodymagazines, postListType2);
@@ -106,14 +106,14 @@ public class MagazinesList {
     }
 
     public String Sök(){
-         // hämtar alla users object och lägger de i en lista
+        // hämtar alla Magazines object och lägger de i en lista
         get_allMagazines();
 
-        // frågar användaren för email
+        // frågar användaren för titeln för tidningen
         IO.println("Ange titel för tidningen som du vill hitta: ");
         String titel = IO.readln().trim().toLowerCase();
 
-        //loopar igenom listUsers för att hitta ett object med samma email
+        //loopar igenom listMagazines för att hitta ett object med samma Titel
         for (Magazines magazine : listMagazines) {
             if (magazine.getTitle().toLowerCase().equals(titel)) {
                 IO.println(magazine);
@@ -127,7 +127,7 @@ public class MagazinesList {
 
     public void TaBort(){
         String id = Sök();
-        // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
+        // loppar igenom listMagazines för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort objekt
         for (Magazines magazine : listMagazines) {
             if (magazine.getId().equals(id)) {
                 listMagazines.remove(magazine);
@@ -155,8 +155,11 @@ public class MagazinesList {
         }
     }
         public void Sortera(){
+        // hämtar alla Magazines och lägger de i en lista
         get_allMagazines();
+        // sorterar Magazines efter bokstavsordning
         Collections.sort(listMagazines);
+        // loppar igenom hela listan av magazines för att sedan kunna skriva up de
         for (Magazines magazines : listMagazines) {
             IO.println(magazines);
         }

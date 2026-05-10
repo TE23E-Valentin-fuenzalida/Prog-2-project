@@ -107,7 +107,7 @@ public class BooksList {
         IO.println("Ange titel för boken som du vill hitta: ");
         String titel = IO.readln().trim().toLowerCase();
 
-        //loopar igenom listUsers för att hitta ett object med samma email
+        //loopar igenom ListBooks för att hitta ett object med samma titel
         for (Books book : listBooks) {
             if (book.getTitle().toLowerCase().equals(titel)) {
                 IO.println(book);
@@ -121,7 +121,7 @@ public class BooksList {
 
     public void TaBort() {
         String id = Sök();
-        // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
+        // loppar igenom listBooks för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
         for (Books book : listBooks) {
             if (book.getId().equals(id)) {
                 listBooks.remove(book);
@@ -150,8 +150,11 @@ public class BooksList {
     }
 
     public void Sortera(){
+        // hämtar alla Books och lägger de i en lista
         get_allBooks();
+        // sorterar alla böcker i listan genom bokstavsordning
         Collections.sort(listBooks);
+        // loppa igenom hela arraylistan av böcker för att skriva ut varje objekt
         for (Books books : listBooks) {
             IO.println(books);
         }

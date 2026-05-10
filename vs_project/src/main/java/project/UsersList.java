@@ -62,7 +62,7 @@ public class UsersList {
         String email = IO.readln();
 
         String get_all_bodyUsers = "";
-        // sätter id som en plus lenghten av hela arraylisten
+        // sätter id som en längre än lenghten av hela arraylisten
         String id = Integer.toString((get_all_bodyUsers.length() + 1));
 
         Users User = new Users(id, name, email);
@@ -105,7 +105,7 @@ public class UsersList {
 
     
     public void TaBort(){
-         // hitta kunden som ska readeras
+         // hitta kunden som ska ta borts
         String id = Sök();
 
         // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
@@ -137,8 +137,11 @@ public class UsersList {
     }
 
     public void Sortera(){
+        // hämtar alla Users och lägger de i lista
         get_allUsers();
+        // sorterar listan för bosktavsordning
         Collections.sort(listUsers);
+        // skriver ut listan genom att loppa igenom varje objekt i  listan
         for (Users users : listUsers) {
             IO.println(users);
         }

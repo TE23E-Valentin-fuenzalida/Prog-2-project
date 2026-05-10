@@ -18,14 +18,11 @@ public class Biblotekssystem {
             6. Ta bort bok  eller tidning
             7. Ta bort kund eller avstängd
             8. Skriva ut sorterat böcker, tidningar eller kunder
-            9. Avsluta
+            9. Vilka användare får inte låna
+            10. Avsluta
         """);
         String val = IO.readln();
 
         return val;
-    }
-
-    public void SuspendedUsers(){
-        
     }
 }

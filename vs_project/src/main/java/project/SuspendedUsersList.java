@@ -46,8 +46,8 @@ public class SuspendedUsersList {
         }
         // hämtar json texten
         String get_all_bodySuspendedUsers = get_all_ResponseSuspendedUsers.getBody();
-        // omvandla json-text till i ArrayList med bok-objekt
-        Type postListType1 = new TypeToken<ArrayList<Users>>() {
+        // omvandla json-text till i ArrayList med SuspendedUser-objekt
+        Type postListType1 = new TypeToken<ArrayList<SuspendedUsers>>() {
         }.getType();
         listSuspendedUsers = gson.fromJson(get_all_bodySuspendedUsers, postListType1);
     }
@@ -68,7 +68,7 @@ public class SuspendedUsersList {
 
         listSuspendedUsers.add(SuspendedUser);
 
-                // sparar informationen på servern
+        // sparar informationen på servern
         HttpResponse<String> Lägg_Till_ResponseSuspendedUser;
         try {
             Lägg_Till_ResponseSuspendedUser = Unirest.post(Main.baseURL+"suspended")
@@ -82,14 +82,14 @@ public class SuspendedUsersList {
     }
 
     public String Sök(){
-        // hämtar alla users object och lägger de i en lista
+        // hämtar alla suspendedUser object och lägger de i en lista
         get_allSuspendedUsers();
 
-        // frågar användaren för email
+        // frågar användaren för userid
         IO.println("Säg kund id för den avstängda du vill hitta: ");
         String userId = IO.readln().trim().toLowerCase();
 
-        //loopar igenom listUsers för att hitta ett object med samma email
+        //loopar igenom listSuspendedUsers för att hitta ett object med samma userid
         for (SuspendedUsers user : listSuspendedUsers) {
             if (user.getUserId().toLowerCase().equals(userId)) {
                 IO.println(user);
@@ -106,7 +106,7 @@ public class SuspendedUsersList {
          // hitta boken som ska readeras
          String id = Sök();
 
-        // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
+        // loppar igenom listSuspendedUsers för att hitta ett objekt som har samma id för att ta bort det objektet
         for (SuspendedUsers users : listSuspendedUsers) {
             if (users.getId().equals(id)) {
                 listSuspendedUsers.remove(users);
@@ -131,6 +131,14 @@ public class SuspendedUsersList {
             IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
         } else {
             IO.println("Något gick fel. Statuskod: " + deleteStatus);
+        }
+    }
+    public void Skriva_ut(){
+        // hämta alla SuspendedUsers objekt och lägg de i en lista
+        get_allSuspendedUsers();
+        // skriva ut alla SuspendedUsers objekt
+        for (SuspendedUsers suspendedUsers : listSuspendedUsers) {
+            IO.println(suspendedUsers);
         }
     }
 }
