@@ -104,7 +104,7 @@ public class MagazinesList {
     }
 
     public Magazines Sök(){
-         IO.println("Säg titeln som du vill hitta för tidningen du vill: ");
+         IO.println("Säg titeln för tidningen som du vill hitta: ");
         String titel = IO.readln().trim().toLowerCase();
         try {
             // Skicakr ett GET anrop till servern för att hämta en bok med viss titel
@@ -125,6 +125,38 @@ public class MagazinesList {
         } catch (UnirestException e) {
             IO.println("Fel vid sökning: "+e.getMessage());
             return null;
+        }
+    }
+
+    public void TaBort(){
+         // hitta boken som ska readeras
+        Magazines magazine = Sök();
+
+        // om boken inte finns
+        if (magazine == null) {
+            return;
+        }
+        // hämtar id för boken
+        String id = magazine.getId();
+
+        int deleteStatus;
+
+        // ta bort från servern
+        try {
+            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen body)
+            deleteStatus = Unirest.delete(Main.baseURL + "/Books/" + id)
+                    .asEmpty() // Skickar INGEN body
+                    .getStatus();
+        } catch (UnirestException e) {
+            IO.println("Undantag uppkoppling: " + e.getLocalizedMessage());
+            return;
+        }
+        if (deleteStatus == 200) {
+            IO.println("Inlägget med TITELN " + id + " är borttaget");
+        } else if (deleteStatus == 204) {
+            IO.println("Inlägget fanns inte kvar / Inget innehåll på titeln=" + id);
+        } else {
+            IO.println("Något gick fel. Statuskod: " + deleteStatus);
         }
     }
 }

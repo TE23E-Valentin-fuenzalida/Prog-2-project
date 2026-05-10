@@ -138,8 +138,7 @@ public class BooksList {
 
         // ta bort från servern
         try {
-            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen
-            // body)
+            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen body)
             deleteStatus = Unirest.delete(Main.baseURL + "/Books/" + id)
                     .asEmpty() // Skickar INGEN body
                     .getStatus();
