@@ -16,7 +16,7 @@ public class Biblotekssystem {
                     4. Söka
                     5. Ta bort
                     6. Skriva ut (sorterat)
-                    7. Vilka får låna
+                    7. Låna
                     8. Avsluta
                         """);
         String val = IO.readln();
@@ -25,7 +25,6 @@ public class Biblotekssystem {
     }
 
     public String hämtaUtAllaMeny() {
-
         IO.println("""
                     Hämta ut (alla)
                     1. Böcker
@@ -39,7 +38,6 @@ public class Biblotekssystem {
     }
 
     public String hämtaUtEnMeny() {
-
         IO.println("""
                     Hämta ut (en)
                     1. bok
@@ -48,12 +46,10 @@ public class Biblotekssystem {
                     4. avstängd
                 """);
         String val = IO.readln();
-
         return val;
     }
 
     public String SkapaNyttMeny() {
-
         IO.println("""
                     Skapa nytt
                     1. Ny bok
@@ -62,26 +58,21 @@ public class Biblotekssystem {
                     4. Ny avstängd
                 """);
         String val = IO.readln();
-
         return val;
     }
 
     public String SökaMeny() {
-
         IO.println("""
                     Söka
                     1. bok
                     2. tidning
                     3. kund
-                    4. avstängd
                 """);
         String val = IO.readln();
-
         return val;
     }
 
     public String TabortMeny() {
-
         IO.println("""
                     Ta bort
                     1. bok
@@ -90,12 +81,10 @@ public class Biblotekssystem {
                     4. avstängd
                 """);
         String val = IO.readln();
-
         return val;
     }
 
     public String SkriaUtMeny() {
-
         IO.println("""
                     Skriva ut (sorterat)
                     1. bok
@@ -103,7 +92,6 @@ public class Biblotekssystem {
                     3. kund
                 """);
         String val = IO.readln();
-
         return val;
     }
 }

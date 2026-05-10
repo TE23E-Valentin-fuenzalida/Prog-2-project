@@ -146,4 +146,7 @@ public class UsersList {
             IO.println(users);
         }
     }
+    public ArrayList<Users> getListUsers(){
+        return listUsers;
+    }
 }

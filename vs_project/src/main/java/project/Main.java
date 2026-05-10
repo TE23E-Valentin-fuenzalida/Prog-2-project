@@ -35,120 +35,92 @@ public class Main {
 /*     public static final String baseURL = "http://10.151.168.5:3148/"; */
     // baseUrl om jag är hemma
        public static final String baseURL = "http://localhost:3000/";
+       // skapar alla object av klasserna som jag använder
+       static Biblotekssystem system = new Biblotekssystem();
+       static UsersList listUsers = new UsersList();
+       static MagazinesList listMagazines = new MagazinesList();
+       static BooksList listBooks = new BooksList();
+       static SuspendedUsersList listSuspendedUsers = new SuspendedUsersList();
     void main() {
-
-        // ArrayLists
-        ArrayList<Magazines> magazinesLista = new ArrayList<>();
-        ArrayList<Books> bokLista = new ArrayList<>();
-        // skapar ett Gson object
-        Gson gson = new Gson();
-
         IO.println("Startar JSON klient");
-
-        // skapar alla object av klasserna som jag använder
-        Biblotekssystem system = new Biblotekssystem();
-        UsersList listUsers = new UsersList();
-        MagazinesList listMagazines = new MagazinesList();
-        BooksList listBooks = new BooksList();
-        SuspendedUsersList listSuspendedUsers = new SuspendedUsersList();
-
+        IO.println();
         while (true) {
 
-            String val = system.meny();
+            String val1 = system.huvudMeny();
 
-            switch (val) {
+            switch (val1) {
                 case "1":
-                    IO.println("Vill du hämta ut alla böcker, tidningar, kunder eller avstängda (b, t, k eller a)");
-                    String svar = IO.readln().toLowerCase().trim();
-                    if (svar == "b") {
+                    String val2 = system.hämtaUtAllaMeny();
+                    if (val2 == "1") {
                         listBooks.get_allBooks();
                     }
-                    else if (svar == "t") {
+                    else if (val2 == "2") {
                         listMagazines.get_allMagazines();
-                    } else if (svar == "k") {
+                    } else if (val2 == "3") {
                         listUsers.get_allUsers();
-                    } else if (svar == "a") {
+                    } else if (val2 == "4") {
                         listSuspendedUsers.get_allSuspendedUsers();
                     }
                     break;
                 case "2":
-                    IO.println("Vill du hämta ut en bok, tidning, kund eller avstängd (b, t, k eller a): ");
-                    String svar1 = IO.readln().toLowerCase().trim();
-                    if (svar1 == "b") {
+                    String val3 = system.hämtaUtEnMeny();
+                    if (val3 == "1") {
                         listBooks.Sök();
                     }
-                    else if (svar1 == "t") {
+                    else if (val3 == "2") {
                         listMagazines.Sök();
-                    } else if (svar1 == "k") {
+                    } else if (val3 == "2") {
                         listUsers.Sök();
-                    } else if (svar1 == "a") {
+                    } else if (val3 == "2") {
                         listSuspendedUsers.Sök();
                     }
                     break;
                 case "3":
-                    IO.println("Vill du skapa en ny bok, tidning, kund eller avstängd (b, t, k eller a): ");
-                    String svar2 = IO.readln().toLowerCase().trim();
-                    if (svar2 == "b") {
+                    String val4 = system.SkapaNyttMeny();
+                    if (val4 == "1") {
                         listBooks.LäggTill();
-                    } else if (svar2 == "t") {
+                    } else if (val4 == "2") {
                         listMagazines.LäggTill();
-                    } else if (svar2 == "k") {
+                    } else if (val4 == "3") {
                         listUsers.LäggTill();
-                    } else if (svar2 == "a") {
+                    } else if (val4 == "4") {
                         listSuspendedUsers.LäggTill();
                     }
                     break;
                 case "4":
-                    listUsers.Sök();
+                    String val5 = system.SökaMeny();
+                    if (val5 == "1") {
+                        listBooks.Sök();
+                    } else if (val5 == "2") {
+                            listMagazines.Sök();
+                    } else if (val5 == "3") {
+                            listUsers.Sök();
+                    }
                     break;
                 case "5":
-                    IO.println("Vill du hita bok eller tidning (b eller t): ");
-                    String svar3 = IO.readln().toLowerCase().trim();
-                    if (svar3 == "b") {
-                        listBooks.Sök();
-                    }
-                    else if (svar3 == "t") {
-                        listMagazines.Sök();
-                    }
-                    break;
-                case "6":
-                    IO.println("vill du ta bort bok eller tidning (b eller t): ");
-                    String svar4 = IO.readln().toLowerCase().trim();
-                    if (svar4 == "b") {
+                    String val6 = system.TabortMeny();
+                    if (val6 == "1") {
                         listBooks.TaBort();
                     }
-                    else if (svar4 == "t") {
+                    else if (val6 == "2") {
                         listMagazines.TaBort();
-                    }
-                    break;
-                case "7":
-                    IO.println("Vill du ta bort en kund eller avstängd (k eller a): ");
-                    String svar5 = IO.readln().toLowerCase().trim();
-                    if (svar5 == "k") {
+                    } else if (val6 == "3") {
                         listUsers.TaBort();
-                    }
-                    else if (svar5 == "a") {
+                    } else if (val6 == "4") {
                         listSuspendedUsers.TaBort();
                     }
                     break;
-                case "8":
-                    IO.println("Skriv ut böcker, tidningar eller kunder (b, t eller k)");
-                    String svar6 = IO.readln().toLowerCase().trim();
-                    if (svar6 == "b") {
+                case "6":
+                    String val7 = system.SkriaUtMeny();
+                    if (val7 == "1") {
                         listBooks.Sortera();
-                    } else if (svar6 == "t") {
+                    } else if (val7 == "2") {
                         listMagazines.Sortera();
-                    } else if (svar6 == "k") {
+                    } else if (val7 == "3") {
                         listUsers.Sortera();
                     }
-                case "9":
-                    IO.println("De här användare får låna");
-                    IO.println();
-                    listUsers.Sortera();
-                    IO.println();
-                    IO.println("De här användare för inte låna");
-                    IO.println();
-                    listSuspendedUsers.Skriva_ut();
+                case "7":
+                    fårduLåna();
                     break;
                 default:
                     break;
@@ -156,5 +128,31 @@ public class Main {
 
         }
 
+    }
+    public void fårduLåna(){
+        // hämtar alla Users och suspendedUsers från servern och lägger de i lista
+        listUsers.get_allUsers();
+        listSuspendedUsers.get_allSuspendedUsers();
+        // frågar användaren för ett id för en kund
+        IO.println("Skriv namnet på kunden: ");
+        String namn = IO.readln().toLowerCase().trim();
+
+        //loopar igenom listUsers för att hitta ett object med samma namn
+        for (Users user : listUsers.getListUsers()) {
+            if (user.getName().toLowerCase().equals(namn)) {
+                // hämtar id för den user som matchade namnet
+                String id = user.getId();
+                // loopar igenom suspendedUsers list för att kolla om någon av id matchar id för kunden
+                for (SuspendedUsers suspendedUser : listSuspendedUsers.getListSuspendedUsers()) {
+                    if (suspendedUser.getUserId().equals(id)) {
+                        IO.println("Kunden är avstängd");
+                        return;
+                    }
+                }
+                IO.println("Kunden får låna");
+                return;
+            }
+        }   
+        IO.println("Ingen kund hittades");
     }
 }

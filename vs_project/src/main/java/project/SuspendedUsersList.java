@@ -133,12 +133,8 @@ public class SuspendedUsersList {
             IO.println("Något gick fel. Statuskod: " + deleteStatus);
         }
     }
-    public void Skriva_ut(){
-        // hämta alla SuspendedUsers objekt och lägg de i en lista
-        get_allSuspendedUsers();
-        // skriva ut alla SuspendedUsers objekt
-        for (SuspendedUsers suspendedUsers : listSuspendedUsers) {
-            IO.println(suspendedUsers);
-        }
+
+    public ArrayList<SuspendedUsers> getListSuspendedUsers(){
+        return listSuspendedUsers;
     }
 }
