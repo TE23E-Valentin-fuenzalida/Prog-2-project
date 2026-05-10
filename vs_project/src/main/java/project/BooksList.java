@@ -98,41 +98,34 @@ public class BooksList {
 
     }
 
-    public Books Sök() {
-        IO.println("Säg titeln som du vill hitta för bokenx: ");
-        String titel = IO.readln().trim().toLowerCase();
-        try {
-            // Skickar ett GET anrop till servern för att hämta en bok med viss titel
-            HttpResponse<Books> response = Unirest.get(Main.baseURL + "books/titel/" + titel)
-                    // försöker omvandla svaret till ett Books-object
-                    .asObject(Books.class);
+    public String Sök(){
+         // hämtar alla users object och lägger de i en lista
+        get_allBooks();
 
-            // kollar om servern svarade "200 OK"
-            if (response.getStatus() == 200) {
-                // hämtar själva body från servern
-                Books bok = response.getBody();
-                // skriver ut boken
-                IO.println("Den boken du hittade är " + bok);
-                return bok;
+        // frågar användaren för email
+        IO.println("Ange titel för tidningen som du vill hitta: ");
+        String titel = IO.readln().trim().toLowerCase();
+
+        //loopar igenom listUsers för att hitta ett object med samma email
+        for (Books book : listBooks) {
+            if (book.getTitle().toLowerCase().equals(titel)) {
+                IO.println(book);
+                return book.getId();
             }
-            IO.println("Boken hittades inte.");
-            return null;
-        } catch (UnirestException e) {
-            IO.println("Fel vid sökning: " + e.getMessage());
-            return null;
         }
+        
+        IO.println("avstängda hittades inte.");
+        return "";
     }
 
     public void TaBort() {
-        // hitta boken som ska readeras
-        Books bok = Sök();
-
-        // om boken inte finns
-        if (bok == null) {
-            return;
+        String id = Sök();
+        // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
+        for (Books book : listBooks) {
+            if (book.getId().equals(id)) {
+                listBooks.remove(book);
+            }
         }
-        // hämtar id för boken
-        String id = bok.getId();
 
         int deleteStatus;
 
@@ -148,8 +141,6 @@ public class BooksList {
         }
         if (deleteStatus == 200) {
             IO.println("Inlägget med ID " + id + " är borttaget");
-            //tar bort boken lokalt
-            listBooks.remove(bok);
         } else if (deleteStatus == 204) {
             IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
         } else {

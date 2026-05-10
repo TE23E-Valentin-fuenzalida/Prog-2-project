@@ -81,42 +81,37 @@ public class SuspendedUsersList {
         }
     }
 
-    public SuspendedUsers Sök(){
-         IO.println("Säg id för den avstängda du vill hitta: ");
-        String userid = IO.readln().trim().toLowerCase();
-        try {
-            // Skickar ett GET anrop till servern för att hämta en avstängd med en viss userid
-            HttpResponse<SuspendedUsers> response = Unirest.get(Main.baseURL+"suspended/userid/"+userid)
-            // försöker omvandla svaret till ett Books-object
-            .asObject(SuspendedUsers.class);
-            
-            // kollar om servern svarade "200 OK" 
-            if (response.getStatus()==200) {
-                // hämtar själva body från servern
-                SuspendedUsers SuspendedUser = response.getBody();
-                //skriver ut boken
-                IO.println("Den avstängda du hittade är "+SuspendedUser);
-                return SuspendedUser;
+    public String Sök(){
+        // hämtar alla users object och lägger de i en lista
+        get_allSuspendedUsers();
+
+        // frågar användaren för email
+        IO.println("Säg kund id för den avstängda du vill hitta: ");
+        String userId = IO.readln().trim().toLowerCase();
+
+        //loopar igenom listUsers för att hitta ett object med samma email
+        for (SuspendedUsers user : listSuspendedUsers) {
+            if (user.getUserId().toLowerCase().equals(userId)) {
+                IO.println(user);
+                return user.getId();
             }
-            IO.println("avstängda hittades inte.");
-            return null;
-        } catch (UnirestException e) {
-            IO.println("Fel vid sökning: "+e.getMessage());
-            return null;
         }
+        
+        IO.println("avstängda hittades inte.");
+        return "";
     }
 
     
     public void TaBort(){
          // hitta boken som ska readeras
-        SuspendedUsers SuspendedUser = Sök();
+         String id = Sök();
 
-        // om boken inte finns
-        if (SuspendedUser == null) {
-            return;
+        // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
+        for (SuspendedUsers users : listSuspendedUsers) {
+            if (users.getId().equals(id)) {
+                listSuspendedUsers.remove(users);
+            }
         }
-        // hämtar id för boken
-        String id = SuspendedUser.getId();
 
         int deleteStatus;
 
@@ -132,8 +127,6 @@ public class SuspendedUsersList {
         }
         if (deleteStatus == 200) {
             IO.println("Inlägget med ID " + id + " är borttaget");
-            //tar bort avstängda lokalt
-            listSuspendedUsers.remove(SuspendedUser);
         } else if (deleteStatus == 204) {
             IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
         } else {

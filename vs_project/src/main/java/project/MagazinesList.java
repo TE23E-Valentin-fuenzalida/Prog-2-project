@@ -103,41 +103,34 @@ public class MagazinesList {
         }
     }
 
-    public Magazines Sök(){
-         IO.println("Säg titeln för tidningen som du vill hitta: ");
+    public String Sök(){
+         // hämtar alla users object och lägger de i en lista
+        get_allMagazines();
+
+        // frågar användaren för email
+        IO.println("Ange titel för tidningen som du vill hitta: ");
         String titel = IO.readln().trim().toLowerCase();
-        try {
-            // Skickar ett GET anrop till servern för att hämta en tidning med viss titel
-            HttpResponse<Magazines> response = Unirest.get(Main.baseURL+"magazines/titel/"+titel)
-            // försöker omvandla svaret till ett Books-object
-            .asObject(Magazines.class);
-            
-            // kollar om servern svarade "200 OK" 
-            if (response.getStatus()==200) {
-                // hämtar själva body från servern
-                Magazines magazine = response.getBody();
-                //skriver ut boken
-                IO.println("Den tidningen du hittade är "+magazine);
-                return magazine;
+
+        //loopar igenom listUsers för att hitta ett object med samma email
+        for (Magazines magazine : listMagazines) {
+            if (magazine.getTitle().toLowerCase().equals(titel)) {
+                IO.println(magazine);
+                return magazine.getId();
             }
-            IO.println("tidningen hittades inte.");
-            return null;
-        } catch (UnirestException e) {
-            IO.println("Fel vid sökning: "+e.getMessage());
-            return null;
         }
+        
+        IO.println("avstängda hittades inte.");
+        return "";
     }
 
     public void TaBort(){
-         // hitta boken som ska readeras
-        Magazines magazine = Sök();
-
-        // om boken inte finns
-        if (magazine == null) {
-            return;
+        String id = Sök();
+        // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
+        for (Magazines magazine : listMagazines) {
+            if (magazine.getId().equals(id)) {
+                listMagazines.remove(magazine);
+            }
         }
-        // hämtar id för boken
-        String id = magazine.getId();
 
         int deleteStatus;
 
@@ -153,8 +146,6 @@ public class MagazinesList {
         }
         if (deleteStatus == 200) {
             IO.println("Inlägget med ID " + id + " är borttaget");
-            //tar bort Magazinet lokalt
-            listMagazines.remove(magazine);
         } else if (deleteStatus == 204) {
             IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
         } else {

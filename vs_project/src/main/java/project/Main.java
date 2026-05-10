@@ -50,6 +50,7 @@ public class Main {
         UsersList listUsers = new UsersList();
         MagazinesList listMagazines = new MagazinesList();
         BooksList listBooks = new BooksList();
+        SuspendedUsersList listSuspendedUsers = new SuspendedUsersList();
 
         while (true) {
 
@@ -74,6 +75,28 @@ public class Main {
                     }
                     break;
                 case "5":
+                    IO.println("vill du ta bort bok eller tidning (b eller t): ");
+                    String svar1 = IO.readln();
+                    if (svar1 == "b") {
+                        listBooks.TaBort();
+                    }
+                    else if (svar1 == "t") {
+                        listMagazines.TaBort();
+                    }
+                    break;
+                case "6":
+                    IO.println("Vill du ta bort en kund eller avstängd (k eller a): ");
+                    String svar2 = IO.readln();
+                    if (svar2 == "k") {
+                        listUsers.TaBort();
+                    }
+                    else if (svar2 == "a") {
+                        listSuspendedUsers.TaBort();
+                    }
+                    break;
+                case "7":
+                    break;
+                case "8":
                     break;
                 default:
                     break;
