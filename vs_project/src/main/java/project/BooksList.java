@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 import javax.swing.plaf.FontUIResource;
 
@@ -148,5 +149,11 @@ public class BooksList {
         }
     }
 
-    
+    public void Sortera(){
+        get_allBooks();
+        Collections.sort(listBooks);
+        for (Books books : listBooks) {
+            IO.println(books);
+        }
+    }
 }

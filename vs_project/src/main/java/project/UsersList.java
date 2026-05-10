@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 import javax.swing.plaf.FontUIResource;
 
@@ -135,7 +136,11 @@ public class UsersList {
         }
     }
 
-    public void sortera(){
-
+    public void Sortera(){
+        get_allUsers();
+        Collections.sort(listUsers);
+        for (Users users : listUsers) {
+            IO.println(users);
+        }
     }
 }

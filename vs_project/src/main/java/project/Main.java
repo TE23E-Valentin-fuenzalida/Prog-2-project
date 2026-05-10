@@ -59,7 +59,7 @@ public class Main {
             switch (val) {
                 case "1":
                     IO.println("Vill du hämta ut alla böcker, tidningar, kunder eller avstängda (b, t, k eller a)");
-                    String svar = IO.readln();
+                    String svar = IO.readln().toLowerCase().trim();
                     if (svar == "b") {
                         listBooks.get_allBooks();
                     }
@@ -123,7 +123,7 @@ public class Main {
                     break;
                 case "7":
                     IO.println("Vill du ta bort en kund eller avstängd (k eller a): ");
-                    String svar5 = IO.readln();
+                    String svar5 = IO.readln().toLowerCase().trim();
                     if (svar5 == "k") {
                         listUsers.TaBort();
                     }
@@ -132,6 +132,15 @@ public class Main {
                     }
                     break;
                 case "8":
+                    IO.println("Skriv ut böcker, tidningar eller kunder (b, t eller k)");
+                    String svar6 = IO.readln().toLowerCase().trim();
+                    if (svar6 == "b") {
+                        listBooks.Sortera();
+                    } else if (svar6 == "t") {
+                        listMagazines.Sortera();
+                    } else if (svar6 == "k") {
+                        listUsers.Sortera();
+                    }
                     break;
                 default:
                     break;

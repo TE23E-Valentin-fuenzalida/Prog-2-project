@@ -18,9 +18,11 @@ import java.io.EOFException;
 import java.io.IOException;
 // arraylist för att lagra objekt
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 import javax.swing.plaf.FontUIResource;
 
@@ -150,6 +152,13 @@ public class MagazinesList {
             IO.println("Inlägget fanns inte kvar / Inget innehåll på id=" + id);
         } else {
             IO.println("Något gick fel. Statuskod: " + deleteStatus);
+        }
+    }
+        public void Sortera(){
+        get_allMagazines();
+        Collections.sort(listMagazines);
+        for (Magazines magazines : listMagazines) {
+            IO.println(magazines);
         }
     }
 }
