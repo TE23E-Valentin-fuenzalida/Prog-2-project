@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Collections;
+import java.util.Iterator;
 
 import javax.swing.plaf.FontUIResource;
 
@@ -105,13 +106,16 @@ public class UsersList {
 
     
     public void TaBort(){
+        Iterator<Users> it = listUsers.iterator();
          // hitta kunden som ska ta borts
         String id = Sök();
 
         // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
-        for (Users users : listUsers) {
-            if (users.getId().equals(id)) {
-                listUsers.remove(users);
+        while (it.hasNext()) {
+            Users user = it.next();
+            if (user.getId().equals(id)) {
+                it.remove();
+                break;
             }
         }
 
@@ -146,6 +150,7 @@ public class UsersList {
             IO.println(users);
         }
     }
+    
     public ArrayList<Users> getListUsers(){
         return listUsers;
     }

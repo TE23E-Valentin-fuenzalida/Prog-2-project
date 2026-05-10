@@ -1,8 +1,5 @@
 package project;
-/* 
-Valentin fuenzalida ribbing
-Main innehåller import saker, URL för servern, menyn
-*/
+
 
 //GSON objekt som vi behöver
 import com.google.gson.*;
@@ -119,6 +116,7 @@ public class Main {
                     } else if (val7.equals("3")) {
                         listUsers.Sortera();
                     }
+                    break;
                 case "7":
                     fårduLåna();
                     break;
@@ -136,7 +134,7 @@ public class Main {
         // frågar användaren för ett id för en kund
         IO.println("Skriv namnet på kunden: ");
         String namn = IO.readln().toLowerCase();
-
+    
         //loopar igenom listUsers för att hitta ett object med samma namn
         for (Users user : listUsers.getListUsers()) {
             if (user.getName().toLowerCase().equals(namn)) {

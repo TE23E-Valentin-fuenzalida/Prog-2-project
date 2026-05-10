@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.Iterator;
 
 import javax.swing.plaf.FontUIResource;
 
@@ -103,13 +104,16 @@ public class SuspendedUsersList {
 
     
     public void TaBort(){
-         // hitta boken som ska readeras
-         String id = Sök();
+        Iterator<SuspendedUsers> it = listSuspendedUsers.iterator();
+         // hitta kunden som ska ta borts
+        String id = Sök();
 
-        // loppar igenom listSuspendedUsers för att hitta ett objekt som har samma id för att ta bort det objektet
-        for (SuspendedUsers users : listSuspendedUsers) {
-            if (users.getId().equals(id)) {
-                listSuspendedUsers.remove(users);
+        // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
+        while (it.hasNext()) {
+            SuspendedUsers SuspendedUser = it.next();
+            if (SuspendedUser.getId().equals(id)) {
+                it.remove();
+                break;
             }
         }
 
