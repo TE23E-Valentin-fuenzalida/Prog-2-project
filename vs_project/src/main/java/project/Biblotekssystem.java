@@ -11,10 +11,11 @@ public class Biblotekssystem {
         """
         välj vad du vill göra
             1. Hämta alla böcker, tidning, kunder eller avstängda
-            2. Skapa ny bok, tidning, kunder eller avstängd
-            3. Hitta kund
-            4. Hitta bok eller tidning
-            5. Ta bort bok  eller tidning
+            2. Hämta en bok, tidning, kund eller avstängd
+            3. Skapa ny bok, tidning, kunder eller avstängd
+            4. Hitta kund
+            5. Hitta bok eller tidning
+            6. Ta bort bok  eller tidning
             7. Ta bort kund eller avstängd
             8. Skriva ut böcker, tidningar, kunder eller avstängda
             9. Avsluta

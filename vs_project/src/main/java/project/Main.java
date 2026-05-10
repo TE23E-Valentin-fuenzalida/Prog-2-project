@@ -62,9 +62,11 @@ public class Main {
                 case "2":
                     break;
                 case "3":
-                    listUsers.Sök();
                     break;
                 case "4":
+                    listUsers.Sök();
+                    break;
+                case "5":
                     IO.println("Vill du hita bok eller tidning (b eller t): ");
                     String svar = IO.readln();
                     if (svar == "b") {
@@ -74,7 +76,7 @@ public class Main {
                         listMagazines.Sök();
                     }
                     break;
-                case "5":
+                case "6":
                     IO.println("vill du ta bort bok eller tidning (b eller t): ");
                     String svar1 = IO.readln();
                     if (svar1 == "b") {
@@ -84,7 +86,7 @@ public class Main {
                         listMagazines.TaBort();
                     }
                     break;
-                case "6":
+                case "7":
                     IO.println("Vill du ta bort en kund eller avstängd (k eller a): ");
                     String svar2 = IO.readln();
                     if (svar2 == "k") {
@@ -93,8 +95,6 @@ public class Main {
                     else if (svar2 == "a") {
                         listSuspendedUsers.TaBort();
                     }
-                    break;
-                case "7":
                     break;
                 case "8":
                     break;
