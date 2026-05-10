@@ -52,41 +52,66 @@ public class BooksList {
         listBooks = gson.fromJson(get_all_bodybooks, postListType1);
     }
 
-    public void LäggTill(){
+    public void LäggTill() {
         // frågar användaren av olika egenskaper
-                    IO.println("titel: ");
-                    String title = IO.readln();
+        IO.println("titel: ");
+        String title = IO.readln();
 
-                    IO.println("författare namn: ");
-                    String författare = IO.readln();
+        IO.println("författare namn: ");
+        String författare = IO.readln();
 
+        IO.println("genre (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
+        String genre = IO.readln();
 
-                    IO.println("genre (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
-                    String genre = IO.readln();
+        int pages = 0;
+        while (true) {
+            IO.println("Sidor");
+            String sidor = IO.readln();
+            try {
+                pages = Integer.parseInt(sidor);
+                break;
+            } catch (NumberFormatException e) {
+                IO.println("fel inmattning. skriv ett nummer");
+            }
+        }
 
-                    int pages = 0;
-                    while (true) {
-                        IO.println("Sidor");
-                        String sidor = IO.readln();
-                        try {
-                            pages = Integer.parseInt(sidor);
-                            break;
-                        } catch (NumberFormatException e) {
-                            IO.println("fel inmattning. skriv ett nummer");
-                        }
-                    }
+        String get_all_bodybooks = "";
+        // sätter id som en plus lenghten av hela arraylisten
+        String id = Integer.toString((get_all_bodybooks.length() + 1));
 
-                    String get_all_bodybooks = "";
-                    // sätter id som en plus lenghten av hela arraylisten
-                    String id = Integer.toString((get_all_bodybooks.length() + 1));
+        Books book = new Books(id, title, true, författare, genre, pages);
 
-                    Books book = new Books(id, title, true, författare, genre, pages);
+        listBooks.add(book);
 
-                    listBooks.add(book);
+        HttpResponse<String> Lägg_Till_ResponseBooks;
+
+        // sparar informationen på servern
+        try{
+            Lägg_Till_ResponseBooks = Unirest.post(Main.baseURL)
+                    .header("Content-Type", "application/json") // VIktigt
+                    .body(book) // Skickar data
+                    .asString(); // Returnerar ett HTTPResponse<String>
+        } catch (UnirestException e) {
+            IO.println("Undantag uppkoppling: " + e.getLocalizedMessage());
+            return;
+        }
+
     }
 
-    public void TaBort(){
-        // frågar användaren om titlen för boken hen vill ta bort
-        IO.println("Ange titeln för boken du vill ta bort");
+        public void Sök(){
+        IO.println("Säg titeln som du vill hitta för boken");
+        String titel = IO.readln().trim().toLowerCase();
+
+        for (Books bok : listBooks) {
+            if (bok.getTitle().toLowerCase().equals(titel)) {
+                IO.println("Boken du letar efter är "+"\n"+bok);
+            }
+        }
     }
+
+    public void TaBort() {
+
+
+    }
+
 }
