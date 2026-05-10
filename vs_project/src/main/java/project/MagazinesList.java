@@ -49,4 +49,58 @@ public class MagazinesList {
         }.getType();
         listMagazines = gson.fromJson(get_all_bodymagazines, postListType2);
     }
+
+    public void LäggTill() {
+        // frågar användaren av olika egenskaper
+        IO.println("Titel: ");
+        String title = IO.readln();
+
+        int issueNumber = 0;
+        while (true) {
+            IO.println("Issue Number: ");
+            String Number = IO.readln();
+            try {
+                issueNumber = Integer.parseInt(Number);
+                break;
+            } catch (NumberFormatException e) {
+                IO.println("fel inmattning. skriv ett nummer");
+            }
+        }
+
+        IO.println("Category");
+        String category = IO.readln();
+
+        int publishedYear = 0;
+        while (true) {
+            IO.println("Published Year: ");
+            String Year = IO.readln();
+            try {
+                publishedYear = Integer.parseInt(Year);
+                break;
+            } catch (NumberFormatException e) {
+                IO.println("fel inmattning. skriv ett nummer");
+            }
+        }
+
+        String get_all_bodymagazines = "";
+        // sätter id som en plus lenghten av hela arraylisten
+        String id = Integer.toString((get_all_bodymagazines.length() + 1));
+
+        Magazines magazine = new Magazines(id, title, true, issueNumber, category, publishedYear);
+
+        listMagazines.add(magazine);
+
+        // sparar informationen på servern
+        HttpResponse<String> Lägg_Till_ResponseMagazines;
+        try {
+            Lägg_Till_ResponseMagazines = Unirest.post(Main.baseURL)
+                    .header("Content-Type", "application/json") // VIktigt
+                    .body(magazine) // Skickar data
+                    .asString(); // Returnerar ett HTTPResponse<String>
+        } catch (UnirestException e) {
+            IO.println("Undantag uppkoppling: " + e.getLocalizedMessage());
+            return;
+        }
+
+    }
 }
