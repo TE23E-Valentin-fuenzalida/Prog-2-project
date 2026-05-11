@@ -7,6 +7,8 @@ lägg till en bok i servern, sök en bok i servern,
 ta bort en bok i servern och skriva ut böcker i bokstavsordning beroende på titel
  */
 
+//TODO fixa så att sortera med metoder går medhjälp av streams
+
 //GSON objekt som vi behöver
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class BooksList {
+public class BooksList implements SaveToFile{
 
     private ArrayList<Books> listBooks = new ArrayList<>();
     Gson gson = new Gson();
@@ -100,6 +102,9 @@ public class BooksList {
          // hämtar alla users object och lägger de i en lista
         get_allBooks();
 
+        // välj sorterings sätt
+        
+
         // frågar användaren för titeln för boken
         IO.println("Ange titel för boken som du vill hitta: ");
         String titel = IO.readln().trim().toLowerCase();
@@ -160,5 +165,12 @@ public class BooksList {
         for (Books books : listBooks) {
             IO.println(books);
         }
+    }
+
+    public void save(){
+
+    }
+    public void read(){
+
     }
 }

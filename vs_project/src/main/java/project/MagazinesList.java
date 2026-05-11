@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class MagazinesList {
+public class MagazinesList implements SaveToFile{
     private ArrayList<Magazines> listMagazines = new ArrayList<>();
     Gson gson = new Gson();
 
@@ -164,5 +164,11 @@ public class MagazinesList {
         for (Magazines magazines : listMagazines) {
             IO.println(magazines);
         }
+    }
+    public void save(){
+
+    }
+    public void read(){
+        
     }
 }

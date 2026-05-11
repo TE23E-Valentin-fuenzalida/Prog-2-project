@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 
-public class UsersList {
+public class UsersList implements SaveToFile{
     private ArrayList<Users> listUsers = new ArrayList<>();
     Gson gson = new Gson();
 
@@ -150,5 +150,12 @@ public class UsersList {
 
     public ArrayList<Users> getListUsers(){
         return listUsers;
+    }
+
+    public void save(){
+
+    }
+    public void read(){
+        
     }
 }

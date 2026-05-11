@@ -85,9 +85,29 @@ public class Biblotekssystem {
         return val;
     }
 
+
+    public String Filtreraböcker(){
+        IO.println("""
+        Filtrera
+        1. genre
+        2. Författare
+                """);
+                String val = IO.readln();
+                return val;
+    }
+    public String Sortera(){
+        IO.println("""
+        Sortera
+        1. 
+                """);
+                String val = IO.readln();
+                return val;
+    }
+//TODO fixa så att det finns olika sätt att sortera med menyer
+    
     public String SkriaUtMeny() {
         IO.println("""
-                    Skriva ut (sorterat)
+                    välj hur du vill skriva ut
                     1. bok
                     2. tidning
                     3. kund

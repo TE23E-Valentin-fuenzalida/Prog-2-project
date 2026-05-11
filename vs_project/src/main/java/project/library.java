@@ -29,6 +29,8 @@ public abstract class library {
         this.title = title;
     }
 
+    public abstract int getLoanDays();
+
     @Override
     // Override för att skriva ut
     public String toString() {

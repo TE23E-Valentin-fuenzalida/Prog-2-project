@@ -9,6 +9,7 @@ public class Magazines extends library implements Comparable<Magazines>{
     private int issueNumber;
     private String category;
     private int publishedYear;
+    private int Loan_Days;
 
     public Magazines(String id, String title, boolean isAvailable, int issueNumber, String category, int publishedYear){
         super(id, title, isAvailable);
@@ -32,6 +33,10 @@ public class Magazines extends library implements Comparable<Magazines>{
     }
     public void setPublishedYear(int publishedYear) {
         this.publishedYear = publishedYear;
+    }
+
+    public int getLoanDays(){
+        return Loan_Days;
     }
 
     @Override

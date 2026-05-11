@@ -21,7 +21,7 @@ import kong.unirest.UnirestException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class SuspendedUsersList {
+public class SuspendedUsersList implements SaveToFile{
     private ArrayList<SuspendedUsers> listSuspendedUsers = new ArrayList<>();
     Gson gson = new Gson();
 
@@ -136,5 +136,12 @@ public class SuspendedUsersList {
 
     public ArrayList<SuspendedUsers> getListSuspendedUsers(){
         return listSuspendedUsers;
+    }
+
+    public void save(){
+
+    }
+    public void read(){
+        
     }
 }

@@ -9,6 +9,7 @@ public class Books extends library implements Comparable<Books>{
     private String author;
     private String genre;
     private int pages;
+    private int Loan_Days;
     
     public Books(String id, String title, boolean isAvailable, String author, String genre, int pages){
         super(id, title, isAvailable);
@@ -34,6 +35,10 @@ public class Books extends library implements Comparable<Books>{
     }
     public void setPages(int pages) {
         this.pages = pages;
+    }
+
+    public int getLoanDays(){
+        return Loan_Days;
     }
 
      @Override
