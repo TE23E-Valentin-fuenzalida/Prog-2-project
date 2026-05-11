@@ -1,5 +1,12 @@
 package project;
 
+/* 
+Valentin fuenzalida ribbing
+SuspendedUsersList innehåller en metod för att hämta alla avstängda in i listan, 
+lägg till en avstängd i servern, sök en avstängd i servern, 
+ta bort en avstängd i servern och en getter för SuspendedUsersList 
+ */
+
 //GSON objekt som vi behöver
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -8,22 +15,11 @@ import java.lang.reflect.Type;
 //Unirest objekt som vi behöver
 import kong.unirest.Unirest;
 import kong.unirest.HttpResponse;
-import kong.unirest.UnirestConfigException;
 import kong.unirest.UnirestException;
 
-//importera Fill hanteringen
-import java.nio.file.*;
-import java.time.chrono.HijrahChronology;
-import java.io.EOFException;
-import java.io.IOException;
-// arraylist för att lagra objekt
+// kunna lagra objekt i listor och ändra i arraylistor
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import java.util.Iterator;
-
-import javax.swing.plaf.FontUIResource;
 
 public class SuspendedUsersList {
     private ArrayList<SuspendedUsers> listSuspendedUsers = new ArrayList<>();

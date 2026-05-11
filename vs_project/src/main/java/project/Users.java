@@ -1,6 +1,7 @@
 package project;
 
 public class Users implements Comparable<Users>{
+    // variabler
     private String id;
     private String name;
     private String email;
@@ -32,10 +33,12 @@ public class Users implements Comparable<Users>{
     }
 
     @Override
+    // Override för att skriva ut
     public String toString() {
         return "\n"+"id: "+id+"\n"+"namn: "+name+"\n"+"email: "+email;
     }
     @Override
+    // Override för att sortera efter namn
     public int compareTo(Users o) {
         return this.name.compareToIgnoreCase(o.name);
     }

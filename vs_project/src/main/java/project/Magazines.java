@@ -1,7 +1,8 @@
 package project;
 /* 
 Valentin fuenzalida ribbing
-magazines innehåller variabler med en konstuktor, getters och setters.
+magazines innehåller variabler med en konstuktor, getters, setters och
+två override en för att skriva ut och en för sortera.
 */
 public class Magazines extends library implements Comparable<Magazines>{
     // variabler
@@ -9,7 +10,6 @@ public class Magazines extends library implements Comparable<Magazines>{
     private String category;
     private int publishedYear;
 
-    //konstruktor för Magazines
     public Magazines(String id, String title, boolean isAvailable, int issueNumber, String category, int publishedYear){
         super(id, title, isAvailable);
         this.issueNumber=issueNumber;
@@ -17,7 +17,6 @@ public class Magazines extends library implements Comparable<Magazines>{
         this.publishedYear=publishedYear;
     }
 
-    // getters
     public String getCatogory() {
         return category;
     }
@@ -28,7 +27,6 @@ public class Magazines extends library implements Comparable<Magazines>{
         return publishedYear;
     }
     
-    // setters
     public void setCatogory(String catogory) {
         this.category = catogory;
     }
@@ -37,10 +35,12 @@ public class Magazines extends library implements Comparable<Magazines>{
     }
 
     @Override
+    // Override för att skriva ut
     public String toString() {
         return "\n"+ "id: "+id+"\n title: "+title+"\n issueNumber: "+issueNumber+"\n category: "+category+"\n publishedYear: "+publishedYear+"\n isAvailable: "+isAvailable+"\n";
     }
     @Override
+    // Override för att sortera efter titel
     public int compareTo(Magazines o) {
         return this.title.compareToIgnoreCase(o.title);
     }

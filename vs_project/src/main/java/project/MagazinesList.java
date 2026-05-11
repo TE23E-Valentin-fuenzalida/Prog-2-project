@@ -1,5 +1,12 @@
 package project;
 
+/* 
+Valentin fuenzalida ribbing
+BooksList innehåller en metod för att hämta alla tidningar in i listan, lägg till ett tidning i servern, 
+sök en tidning i servern, ta bort en tidning i servern och 
+skriva ut tidningar i bokstavsordning beroende på titeln
+ */
+
 //GSON objekt som vi behöver
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -8,24 +15,12 @@ import java.lang.reflect.Type;
 //Unirest objekt som vi behöver
 import kong.unirest.Unirest;
 import kong.unirest.HttpResponse;
-import kong.unirest.UnirestConfigException;
 import kong.unirest.UnirestException;
 
-//importera Fill hanteringen
-import java.nio.file.*;
-import java.time.chrono.HijrahChronology;
-import java.io.EOFException;
-import java.io.IOException;
-// arraylist för att lagra objekt
+// kunna lagra objekt i listor och ändra i arraylistor
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.Collections;
 import java.util.Iterator;
-
-import javax.swing.plaf.FontUIResource;
 
 public class MagazinesList {
     private ArrayList<Magazines> listMagazines = new ArrayList<>();

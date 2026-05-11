@@ -9,14 +9,12 @@ public abstract class library {
     protected String title;
     protected boolean isAvailable;
 
-    // konstruktor för library
     public library(String id, String title, boolean isAvailable){
         this.id=id;
         this.title=title;
         this.isAvailable=isAvailable;
     }
 
-    // getters
     public String getId() {
         return id;
     }
@@ -32,6 +30,7 @@ public abstract class library {
     }
 
     @Override
+    // Override för att skriva ut
     public String toString() {
         return "id: "+id+"\n title: "+title+"\n isAvailable: "+isAvailable+"\n";
     }

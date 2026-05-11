@@ -1,10 +1,11 @@
 package project;
 
+/* 
+Valentin fuenzalida ribbing
+Biblotekssystemet innehåller en metod för huvud menyn och 6 andera menyer som under menyer
+*/
+
 public class Biblotekssystem {
-    private static UsersList Usersregister;
-    private static SuspendedUsersList SuspendedUsersregister;
-    private static BooksList Booksregister;
-    private static MagazinesList Magazinesregister;
 
     // huvudmeny
     public String huvudMeny() {

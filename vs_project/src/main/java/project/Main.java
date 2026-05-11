@@ -1,36 +1,16 @@
 package project;
 
-
-//GSON objekt som vi behöver
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-//importera Type för att hjälpa json att omvandla data
-import java.lang.reflect.Type;
-//Unirest objekt som vi behöver
-import kong.unirest.Unirest;
-import kong.unirest.HttpResponse;
-import kong.unirest.UnirestConfigException;
-import kong.unirest.UnirestException;
-
-//importera Fill hanteringen
-import java.nio.file.*;
-import java.time.chrono.HijrahChronology;
-import java.io.EOFException;
-import java.io.IOException;
-// arraylist för att lagra objekt
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
-import javax.swing.plaf.FontUIResource;
-
-import org.apache.http.impl.client.BasicCookieStore;
+/* 
+Valentin fuenzalida ribbing
+Main innehåller objekt av alla klass listor jag har och bioblotekssystemet.
+Den innehåller också de olika valen jag kan göra.
+Dessutom metoden för om en användare får låna eller inte låna
+*/
 
 public class Main {
-    // baseURL
+    // baseURL för skolan
 /*     public static final String baseURL = "http://10.151.168.5:3148/"; */
-    // baseUrl om jag är hemma
+    // baseUrl för ej skolan
        public static final String baseURL = "http://localhost:3000/";
        // skapar alla object av klasserna som jag använder
        static Biblotekssystem system = new Biblotekssystem();
@@ -39,9 +19,10 @@ public class Main {
        static BooksList listBooks = new BooksList();
        static SuspendedUsersList listSuspendedUsers = new SuspendedUsersList();
     void main() {
+        boolean program = true;
         IO.println("Startar JSON klient");
         IO.println();
-        while (true) {
+        while (program) {
 
             String val1 = system.huvudMeny();
 
@@ -121,6 +102,7 @@ public class Main {
                     fårduLåna();
                     break;
                 default:
+                    program = false;
                     break;
             }
 

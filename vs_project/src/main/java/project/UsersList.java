@@ -1,5 +1,12 @@
 package project;
 
+/* 
+Valentin fuenzalida ribbing
+UsersList innehåller en metod för att hämta alla Kunder in i listan, 
+lägg till en Kund i servern, sök en bok i servern, ta bort en Kund i servern och 
+skriva ut Kunder i bokstavsordning beroende på namn
+ */
+
 //GSON objekt som vi behöver
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -8,23 +15,13 @@ import java.lang.reflect.Type;
 //Unirest objekt som vi behöver
 import kong.unirest.Unirest;
 import kong.unirest.HttpResponse;
-import kong.unirest.UnirestConfigException;
 import kong.unirest.UnirestException;
 
-//importera Fill hanteringen
-import java.nio.file.*;
-import java.time.chrono.HijrahChronology;
-import java.io.EOFException;
-import java.io.IOException;
-// arraylist för att lagra objekt
+// kunna lagra objekt i listor och ändra i arraylistor
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import java.util.Collections;
 import java.util.Iterator;
 
-import javax.swing.plaf.FontUIResource;
 
 public class UsersList {
     private ArrayList<Users> listUsers = new ArrayList<>();
@@ -150,7 +147,7 @@ public class UsersList {
             IO.println(users);
         }
     }
-    
+
     public ArrayList<Users> getListUsers(){
         return listUsers;
     }

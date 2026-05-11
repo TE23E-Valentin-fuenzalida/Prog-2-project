@@ -1,5 +1,9 @@
 package project;
-
+/* 
+Valentin fuenzalida ribbing
+SuspendedUsers innehåller variabler med en konstuktor, getters, setters och
+en override en för att skriva ut.
+*/
 public class SuspendedUsers {
     private String id;
     private String userId;
