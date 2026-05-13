@@ -7,8 +7,16 @@ lägg till en bok i servern, sök en bok i servern,
 ta bort en bok i servern och skriva ut böcker i bokstavsordning beroende på titel
  */
 
-//TODO fixa så att sortera med metoder går medhjälp av streams
-//TODO använda hashmap så att jag kan söka efter saker snabbt
+//TODO (Andra) använda hashmap så att jag kan söka efter saker snabbt
+//TODO (Sist) använda packet för att sortera in metoderna enklare
+//TODO (Sist) använda en packet för alla getall och sätt frågor för varje med if satser så att Main behöver endast en metod. samma med alla andra metoder som finns i alla mina listor
+//TODO (Första) fixa så att sortera med metoder går medhjälp av streams
+//TODO (Första) Kunna filtrera för författare (Streams)
+//TODO (Första) Kunna filtrera för genre (streams)
+//TODO (Första) Kunna sortera för författare (streams)
+//TODO (Första) Kunna sortera för genre (streams)
+//TODO (Första) Kunna ge antal böcker för en författare (streams)
+//TODO (Första) Kunna ge antal Böcker för 
 
 //GSON objekt som vi behöver
 import com.google.gson.*;
@@ -24,6 +32,9 @@ import kong.unirest.UnirestException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.List;
 
 public class BooksList implements SaveToFile{
 
@@ -157,7 +168,7 @@ public class BooksList implements SaveToFile{
         }
     }
 
-    public void Sortera(){
+    public void Sorterabokstavsordning(){
         // hämtar alla Books och lägger de i en lista
         get_allBooks();
         // sorterar alla böcker i listan genom bokstavsordning
@@ -166,6 +177,56 @@ public class BooksList implements SaveToFile{
         for (Books books : listBooks) {
             IO.println(books);
         }
+    }
+
+    public void SorteraFörfattare(){
+        // Hämtar alla Books och lägger de i en lista
+        get_allBooks();
+        // sortera för en specifik författare
+        IO.println("Säg namnet på författaren du vill sortera efter");
+        String författare = IO.readln();
+        List<Books> författareBooks = listBooks.stream()
+                        .filter(f -> f.getAuthor().equalsIgnoreCase(författare))
+                        .collect(Collectors.toList());
+
+        if (författareBooks.isEmpty()) {
+            IO.println("Ingen bok av den författare hittades");
+        }
+        else {
+            IO.println("Hittade böckerna\n");
+            for (Books books : författareBooks) {
+                IO.println("- "+books);
+            }
+        }
+
+    }
+    
+    public void SorteraGenre(){
+        // Hämtar alla Böcker och lägger de i en lista
+        get_allBooks();
+        // while loop tills du ha valt rätt
+        boolean sorteragenre = true;
+        while (sorteragenre) {
+            // Sortera efter en specifik genre
+            IO.println("Säg genre du vill sortera efter (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
+            String genre = IO.readln();
+            List<Books> genreBooks = listBooks.stream()
+            .filter(g -> g.getGenre().equalsIgnoreCase(genre))
+            .collect(Collectors.toList());
+            if (genreBooks.isEmpty()) {
+                IO.println("Ingen bok av den genre, välj en annan");
+                return;
+            }
+            else {
+                IO.println("Hittade böcker\n");
+                for (Books books : genreBooks) {
+                    IO.println("- "+books);
+                }
+            }
+        }
+    }
+    public void antal(){
+        
     }
 
     public void save(){

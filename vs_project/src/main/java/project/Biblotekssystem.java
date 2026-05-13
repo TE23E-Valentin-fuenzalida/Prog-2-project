@@ -84,9 +84,6 @@ public class Biblotekssystem {
         String val = IO.readln();
         return val;
     }
-
-
-    //TODO fixa så att det finns olika sätt att sortera med menyer
     
     public String SkriaUtMeny() {
         IO.println("""
