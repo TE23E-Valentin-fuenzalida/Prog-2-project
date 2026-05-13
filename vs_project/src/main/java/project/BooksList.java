@@ -8,6 +8,7 @@ ta bort en bok i servern och skriva ut böcker i bokstavsordning beroende på ti
  */
 
 //TODO fixa så att sortera med metoder går medhjälp av streams
+//TODO använda hashmap så att jag kan söka efter saker snabbt
 
 //GSON objekt som vi behöver
 import com.google.gson.*;

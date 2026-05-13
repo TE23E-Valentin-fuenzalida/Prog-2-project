@@ -4,6 +4,8 @@ Valentin fuenzalida ribbing
 magazines innehåller variabler med en konstuktor, getters, setters och
 två override en för att skriva ut och en för sortera.
 */
+
+//TODO fixa så Loan_days
 public class Magazines extends library implements Comparable<Magazines>{
     // variabler
     private int issueNumber;

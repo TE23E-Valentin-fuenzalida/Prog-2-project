@@ -4,6 +4,7 @@ Valentin fuenzalida ribbing
 Books innehåller variabler med en konstuktor, getters, setters och
 två override en för att skriva ut och en för sortera.
 */
+//TODO fixa Loan_Days
 public class Books extends library implements Comparable<Books>{
     // variabler för Books
     private String author;
