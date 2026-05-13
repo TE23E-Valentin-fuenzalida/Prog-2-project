@@ -182,51 +182,71 @@ public class BooksList implements SaveToFile{
     public void SorteraFörfattare(){
         // Hämtar alla Books och lägger de i en lista
         get_allBooks();
-        // sortera för en specifik författare
-        IO.println("Säg namnet på författaren du vill sortera efter");
-        String författare = IO.readln();
-        List<Books> författareBooks = listBooks.stream()
-                        .filter(f -> f.getAuthor().equalsIgnoreCase(författare))
-                        .collect(Collectors.toList());
-
-        if (författareBooks.isEmpty()) {
-            IO.println("Ingen bok av den författare hittades");
-        }
-        else {
-            IO.println("Hittade böckerna\n");
-            for (Books books : författareBooks) {
-                IO.println("- "+books);
-            }
-        }
+        // while loop till du väljer rätt
+                //TODO stream med sorted()
+                // först sortera författarna i bokstavsordning och sen i varje författare ska jag gå igenom varje bok 
+                // som har den författaren och skriva ut de och sen fortsätta till nästa författare
+                List<Books> författareSortera;
 
     }
-    
     public void SorteraGenre(){
         // Hämtar alla Böcker och lägger de i en lista
         get_allBooks();
+        //TODO stream med sorted()
+        // först sortera genre i bokstavsordning och sen i varje genre ska jag gå igenom varje bok 
+        // som har den genre och skriva ut de och sen fortsätta till nästa genre
+        List<Books> genreBooksSortera;
+    }
+
+    public void filtreraFörfattare(){
+        // Hämtar alla Böcker och lägger de i en lista
+        get_allBooks();
         // while loop tills du ha valt rätt
-        boolean sorteragenre = true;
-        while (sorteragenre) {
+        boolean filtreraFörfattareböcker = true;
+        while (filtreraFörfattareböcker) {
+            // Sortera efter en specifik genre
+            IO.println("Säg författare du vill sortera efter: ");
+            String författare = IO.readln();
+            List<Books> författareBooksFiltrera = listBooks.stream()
+            .filter(f -> f.getAuthor().equalsIgnoreCase(författare))
+            .collect(Collectors.toList());
+            if (författareBooksFiltrera.isEmpty()) {
+                IO.println("Ingen bok av den författare, välj en annan");
+                return;
+            }
+            else {
+                IO.println("Hittade böcker\n");
+                for (Books books : författareBooksFiltrera) {
+                    IO.println("- "+books);
+                }
+                filtreraFörfattareböcker = false;
+            }
+        }
+    }
+    public void filtreraGenre(){
+        // Hämtar alla Böcker och lägger de i en lista
+        get_allBooks();
+        // while loop tills du ha valt rätt
+        boolean filtreragenreböcker = true;
+        while (filtreragenreböcker) {
             // Sortera efter en specifik genre
             IO.println("Säg genre du vill sortera efter (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
             String genre = IO.readln();
-            List<Books> genreBooks = listBooks.stream()
+            List<Books> genrefiltreraböcker = listBooks.stream()
             .filter(g -> g.getGenre().equalsIgnoreCase(genre))
             .collect(Collectors.toList());
-            if (genreBooks.isEmpty()) {
+            if (genrefiltreraböcker.isEmpty()) {
                 IO.println("Ingen bok av den genre, välj en annan");
                 return;
             }
             else {
                 IO.println("Hittade böcker\n");
-                for (Books books : genreBooks) {
+                for (Books books : genrefiltreraböcker) {
                     IO.println("- "+books);
                 }
+                filtreragenreböcker = false;
             }
         }
-    }
-    public void antal(){
-        
     }
 
     public void save(){
