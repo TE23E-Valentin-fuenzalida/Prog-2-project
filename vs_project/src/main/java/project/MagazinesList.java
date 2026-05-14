@@ -240,7 +240,6 @@ public class MagazinesList implements SaveToFile {
                 List<Magazines> publishedYearfiltrera = listMagazines.stream()
                         .filter(p -> p.getPublishedYear() == searchYear)
                         .collect(Collectors.toList());
-                
 
                 if (publishedYearfiltrera.isEmpty()) {
                     IO.println("Ingen tidningar hittades från år"+publishedYear+", försök igen");
@@ -285,7 +284,38 @@ public class MagazinesList implements SaveToFile {
         }
     }
 
-    
+        public void antalpublishedYear(){
+        get_allMagazines();
+        IO.println("Säg det året där du vill veta antalet tidningar som skrevs då");
+        String Year = IO.readln();
+
+        int publishedYear = 0;
+        while (true) {
+            try {
+                publishedYear = Integer.parseInt(Year);
+
+                final int antalYear = publishedYear;
+                
+                        long antalpublishedYear = listMagazines.stream()
+                                      .filter(a -> a.getPublishedYear() == antalYear)
+                                      .count();
+                                      IO.println("Antal böcker som "+publishedYear+" har skrivit är: "+antalpublishedYear);
+            } catch (Exception e) {
+                IO.println("fel inmattning. skriv ett år (t.ex. 2024)");
+            }
+        }
+        
+    }
+    public void antalCategory(){
+        get_allMagazines();
+        IO.println("Säg den kategori där du vill veta antalet tidningar som finns av den kategorin");
+        String category = IO.readln();
+        long antalCategory = listMagazines.stream()
+                      .filter(a -> a.getCatogory().equalsIgnoreCase(category))
+                      .count();
+        
+        IO.println("Antal böcker som "+category+" har skrivit är: "+antalCategory);
+    }
 
     public void save() {
 
