@@ -235,8 +235,8 @@ public class BooksList implements SaveToFile {
         // while loop tills du ha valt rätt
         boolean filtreraFörfattareböcker = true;
         while (filtreraFörfattareböcker) {
-            // Sortera efter en specifik genre
-            IO.println("Säg författare du vill sortera efter: ");
+            // filtrerar ut en specifik författare
+            IO.println("Säg författare du vill filtrera ut: ");
             String författare = IO.readln();
             List<Books> författareBooksFiltrera = listBooks.stream()
                     .filter(f -> f.getAuthor().equalsIgnoreCase(författare))

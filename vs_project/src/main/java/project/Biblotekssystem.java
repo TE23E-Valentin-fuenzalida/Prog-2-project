@@ -101,8 +101,8 @@ public class Biblotekssystem {
     public String Filtrera() {
         IO.println("""
                 Filtrera
-                1. Tidningar
-                2. Böcker
+                1. Böcker
+                2. Tidningar
                 """);
         String val = IO.readln();
         return val;

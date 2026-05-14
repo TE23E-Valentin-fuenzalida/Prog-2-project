@@ -99,13 +99,22 @@ public class Main {
                     break;
                 case "6":
                     String val7 = system.SkriaUtMeny();
-                    if (val7.equals("2")) {
-                        String val7_1 = system.Sortera();
-
-                        if (val7_1.equals("1")) {
-                            String val7_1_2 = system.SorteraBooks();
-                            if (val7_1_2.equals("2")) {
-                                listBooks.SorteraGenre();
+                    if (val7.equals("1")) {
+                        
+                    } else if (val7.equals("2")) {
+                        String val7_2 = system.Sortera();
+                            if (val7_2.equals("1")) {
+                                String val7_2_2 = system.SorteraBooks();
+                                if (val7_2_2.equals("2")) {
+                                    listBooks.SorteraGenre();
+                                }
+                            }
+                    } else if (val7.equals("3")) {
+                        String val7_3 = system.Filtrera();
+                        if (val7_3.equals("1")) {
+                            String val7_3_1 = system.FiltreraBooks();
+                            if (val7_3_1.equals("2")) {
+                                listBooks.filtreraFörfattare();
                             }
                         }
                     }
