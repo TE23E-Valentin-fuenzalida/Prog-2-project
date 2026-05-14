@@ -20,9 +20,12 @@ import kong.unirest.UnirestException;
 // kunna lagra objekt i listor och ändra i arraylistor
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class MagazinesList implements SaveToFile{
+public class MagazinesList implements SaveToFile {
     private ArrayList<Magazines> listMagazines = new ArrayList<>();
     Gson gson = new Gson();
 
@@ -91,7 +94,7 @@ public class MagazinesList implements SaveToFile{
         // sparar informationen på servern
         HttpResponse<String> Lägg_Till_ResponseMagazines;
         try {
-            Lägg_Till_ResponseMagazines = Unirest.post(Main.baseURL+"magazines")
+            Lägg_Till_ResponseMagazines = Unirest.post(Main.baseURL + "magazines")
                     .header("Content-Type", "application/json") // VIktigt
                     .body(magazine) // Skickar data
                     .asString(); // Returnerar ett HTTPResponse<String>
@@ -101,7 +104,7 @@ public class MagazinesList implements SaveToFile{
         }
     }
 
-    public String Sök(){
+    public String Sök() {
         // hämtar alla Magazines object och lägger de i en lista
         get_allMagazines();
 
@@ -109,24 +112,25 @@ public class MagazinesList implements SaveToFile{
         IO.println("Ange titel för tidningen som du vill hitta: ");
         String titel = IO.readln().trim().toLowerCase();
 
-        //loopar igenom listMagazines för att hitta ett object med samma Titel
+        // loopar igenom listMagazines för att hitta ett object med samma Titel
         for (Magazines magazine : listMagazines) {
             if (magazine.getTitle().toLowerCase().equals(titel)) {
                 IO.println(magazine);
                 return magazine.getId();
             }
         }
-        
+
         IO.println("avstängda hittades inte.");
         return "";
     }
 
-    public void TaBort(){
-    Iterator<Magazines> it = listMagazines.iterator();
-         // hitta kunden som ska ta borts
+    public void TaBort() {
+        Iterator<Magazines> it = listMagazines.iterator();
+        // hitta kunden som ska ta borts
         String id = Sök();
 
-        // loppar igenom listusers för att hitta ett objekt som har samma id som det id jag fick från Sök() och sen ta bort detta objekt
+        // loppar igenom listusers för att hitta ett objekt som har samma id som det id
+        // jag fick från Sök() och sen ta bort detta objekt
         while (it.hasNext()) {
             Magazines magazines = it.next();
             if (magazines.getId().equals(id)) {
@@ -139,7 +143,8 @@ public class MagazinesList implements SaveToFile{
 
         // ta bort från servern
         try {
-            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen body)
+            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen
+            // body)
             deleteStatus = Unirest.delete(Main.baseURL + "magazines/" + id)
                     .asEmpty() // Skickar INGEN body
                     .getStatus();
@@ -155,20 +160,124 @@ public class MagazinesList implements SaveToFile{
             IO.println("Något gick fel. Statuskod: " + deleteStatus);
         }
     }
-        public void Sortera(){
-        // hämtar alla Magazines och lägger de i en lista
+
+    public void Sorterabokstavsordning() {
+        // hämtar alla Books och lägger de i en lista
         get_allMagazines();
-        // sorterar Magazines efter bokstavsordning
+        // sorterar alla böcker i listan genom bokstavsordning
         Collections.sort(listMagazines);
-        // loppar igenom hela listan av magazines för att sedan kunna skriva up de
+        // loppa igenom hela arraylistan av böcker för att skriva ut varje objekt
         for (Magazines magazines : listMagazines) {
             IO.println(magazines);
         }
     }
-    public void save(){
+
+    public void SorteraPublishedYear() {
+        // Hämtar alla Books och lägger de i en lista
+        get_allMagazines();
+
+        // 1. Sortera listan först efter år, sedan efter Titel
+        List<Magazines> sortedMagazines = listMagazines.stream()
+                .sorted(Comparator.comparingInt(Magazines::getPublishedYear)
+                        .thenComparing(Magazines::getTitle)) // Sorterar titlar inom samma genre
+                .collect(Collectors.toList());
+
+                // 2. Skriv ut resultatet med rubriker för varje genre
+                int currentYear = -1;
+
+                for (Magazines m : sortedMagazines) {
+
+                    // Om tidningens år inte är samma som det förra, skriv en ny rubrik
+                    if (m.getPublishedYear() != currentYear) {
+                        currentYear = m.getPublishedYear();
+                        IO.println("\n--- År: " + currentYear + " ---");
+                    }
+
+                    // Skriv ut boken
+                    IO.println(m);
+                }
+    }
+
+    public void Sortera() {
+        // Hämtar alla Böcker och lägger de i en lista
+        get_allBooks();
+        // 1. Sortera listan först efter Genre, sedan efter Titel
+        List<Books> sortedBooks = listBooks.stream()
+                .sorted(Comparator.comparing(Books::getGenre)
+                        .thenComparing(Books::getTitle)) // Sorterar titlar inom samma genre
+                .collect(Collectors.toList());
+
+        // 2. Skriv ut resultatet med rubriker för varje genre
+        String currentGenre = "";
+
+        for (Books b : sortedBooks) {
+            // Om genren ändras, skriv ut en ny rubrik
+            if (!b.getGenre().equals(currentGenre)) {
+                currentGenre = b.getGenre();
+                IO.println("\n--- GENRE: " + currentGenre.toUpperCase() + " ---");
+            }
+
+            // Skriv ut boken
+            IO.println(b);
+        }
+    }
+
+    public void filtreraFörfattare() {
+        // Hämtar alla Böcker och lägger de i en lista
+        get_allBooks();
+        // while loop tills du ha valt rätt
+        boolean filtreraFörfattareböcker = true;
+        while (filtreraFörfattareböcker) {
+            // filtrerar ut en specifik författare
+            IO.println("Säg författare du vill filtrera ut: ");
+            String författare = IO.readln();
+            List<Books> författareBooksFiltrera = listBooks.stream()
+                    .filter(f -> f.getAuthor().equalsIgnoreCase(författare))
+                    .collect(Collectors.toList());
+            if (författareBooksFiltrera.isEmpty()) {
+                IO.println("Ingen bok av den författare, välj en annan");
+                return;
+            } else {
+                IO.println("Hittade böcker\n");
+                for (Books books : författareBooksFiltrera) {
+                    IO.println("- " + books);
+                }
+                filtreraFörfattareböcker = false;
+            }
+        }
+    }
+
+    public void filtreraGenre() {
+        // Hämtar alla Böcker och lägger de i en lista
+        get_allBooks();
+        // while loop tills du ha valt rätt
+        boolean filtreragenreböcker = true;
+        while (filtreragenreböcker) {
+            // Sortera efter en specifik genre
+            IO.println(
+                    "Säg genre du vill sortera efter (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
+            String genre = IO.readln();
+            List<Books> genrefiltreraböcker = listBooks.stream()
+                    .filter(g -> g.getGenre().equalsIgnoreCase(genre))
+                    .collect(Collectors.toList());
+            if (genrefiltreraböcker.isEmpty()) {
+                IO.println("Ingen bok av den genre, välj en annan");
+                return;
+            } else {
+                IO.println("Hittade böcker\n");
+                for (Books books : genrefiltreraböcker) {
+                    IO.println("- " + books);
+                }
+                filtreragenreböcker = false;
+            }
+        }
+    }
+
+    public void save() {
 
     }
-    public void read(){
-        
+
+    public void read() {
+
     }
 }
