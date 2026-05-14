@@ -177,7 +177,7 @@ public class MagazinesList implements SaveToFile {
         get_allMagazines();
 
         // 1. Sortera listan först efter år, sedan efter Titel
-        List<Magazines> sortedMagazines = listMagazines.stream()
+        List<Magazines> sortedMagazinesYear = listMagazines.stream()
                 .sorted(Comparator.comparingInt(Magazines::getPublishedYear)
                         .thenComparing(Magazines::getTitle)) // Sorterar titlar inom samma genre
                 .collect(Collectors.toList());
@@ -185,7 +185,7 @@ public class MagazinesList implements SaveToFile {
                 // 2. Skriv ut resultatet med rubriker för varje genre
                 int currentYear = -1;
 
-                for (Magazines m : sortedMagazines) {
+                for (Magazines m : sortedMagazinesYear) {
 
                     // Om tidningens år inte är samma som det förra, skriv en ny rubrik
                     if (m.getPublishedYear() != currentYear) {
@@ -198,27 +198,27 @@ public class MagazinesList implements SaveToFile {
                 }
     }
 
-    public void Sortera() {
+    public void SorteraCategory() {
         // Hämtar alla Böcker och lägger de i en lista
-        get_allBooks();
+        get_allMagazines();
         // 1. Sortera listan först efter Genre, sedan efter Titel
-        List<Books> sortedBooks = listBooks.stream()
-                .sorted(Comparator.comparing(Books::getGenre)
-                        .thenComparing(Books::getTitle)) // Sorterar titlar inom samma genre
+        List<Magazines> sortedMagazinesCategory = listMagazines.stream()
+                .sorted(Comparator.comparing(Magazines::getCatogory)
+                        .thenComparing(Magazines::getTitle)) // Sorterar titlar inom samma genre
                 .collect(Collectors.toList());
 
         // 2. Skriv ut resultatet med rubriker för varje genre
-        String currentGenre = "";
+        String currentCategory = "";
 
-        for (Books b : sortedBooks) {
+        for (Magazines m : sortedMagazinesCategory) {
             // Om genren ändras, skriv ut en ny rubrik
-            if (!b.getGenre().equals(currentGenre)) {
-                currentGenre = b.getGenre();
-                IO.println("\n--- GENRE: " + currentGenre.toUpperCase() + " ---");
+            if (!m.getCatogory().equals(currentCategory)) {
+                currentCategory = m.getGenre();
+                IO.println("\n--- GENRE: " + currentCategory.toUpperCase() + " ---");
             }
 
             // Skriv ut boken
-            IO.println(b);
+            IO.println(m);
         }
     }
 
