@@ -35,8 +35,9 @@ import java.util.Iterator;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.List;
+import java.util.Comparator;
 
-public class BooksList implements SaveToFile{
+public class BooksList implements SaveToFile {
 
     private ArrayList<Books> listBooks = new ArrayList<>();
     Gson gson = new Gson();
@@ -99,7 +100,7 @@ public class BooksList implements SaveToFile{
 
         // sparar informationen på servern
         try {
-            Lägg_Till_ResponseBooks = Unirest.post(Main.baseURL+"books")
+            Lägg_Till_ResponseBooks = Unirest.post(Main.baseURL + "books")
                     .header("Content-Type", "application/json") // VIktigt
                     .body(book) // Skickar data
                     .asString(); // Returnerar ett HTTPResponse<String>
@@ -110,32 +111,31 @@ public class BooksList implements SaveToFile{
 
     }
 
-    public String Sök(){
-         // hämtar alla users object och lägger de i en lista
+    public String Sök() {
+        // hämtar alla users object och lägger de i en lista
         get_allBooks();
 
         // välj sorterings sätt
-        
 
         // frågar användaren för titeln för boken
         IO.println("Ange titel för boken som du vill hitta: ");
         String titel = IO.readln().trim().toLowerCase();
 
-        //loopar igenom ListBooks för att hitta ett object med samma titel
+        // loopar igenom ListBooks för att hitta ett object med samma titel
         for (Books book : listBooks) {
             if (book.getTitle().toLowerCase().equals(titel)) {
                 IO.println(book);
                 return book.getId();
             }
         }
-        
+
         IO.println("avstängda hittades inte.");
         return "";
     }
 
     public void TaBort() {
-    Iterator<Books> it = listBooks.iterator();
-         // hitta kunden som ska ta borts
+        Iterator<Books> it = listBooks.iterator();
+        // hitta kunden som ska ta borts
         String id = Sök();
 
         // loppar igenom listusers för att ta bort objektet med samma id
@@ -151,7 +151,8 @@ public class BooksList implements SaveToFile{
 
         // ta bort från servern
         try {
-            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen body)
+            // skicka ett DELETE-anrop och hämta bara statuskoden (vi förväntar oss ingen
+            // body)
             deleteStatus = Unirest.delete(Main.baseURL + "books/" + id)
                     .asEmpty() // Skickar INGEN body
                     .getStatus();
@@ -168,7 +169,7 @@ public class BooksList implements SaveToFile{
         }
     }
 
-    public void Sorterabokstavsordning(){
+    public void Sorterabokstavsordning() {
         // hämtar alla Books och lägger de i en lista
         get_allBooks();
         // sorterar alla böcker i listan genom bokstavsordning
@@ -179,26 +180,44 @@ public class BooksList implements SaveToFile{
         }
     }
 
-    public void SorteraFörfattare(){
+    public void SorteraFörfattare() {
         // Hämtar alla Books och lägger de i en lista
         get_allBooks();
         // while loop till du väljer rätt
-                //TODO stream med sorted()
-                // först sortera författarna i bokstavsordning och sen i varje författare ska jag gå igenom varje bok 
-                // som har den författaren och skriva ut de och sen fortsätta till nästa författare
-                List<Books> författareSortera;
+        // TODO stream med sorted()
+        // först sortera författarna i bokstavsordning och sen i varje författare ska
+        // jag gå igenom varje bok
+        // som har den författaren och skriva ut de och sen fortsätta till nästa
+        // författare
+        List<Books> författareSortera;
 
     }
-    public void SorteraGenre(){
+
+    public void SorteraGenre() {
         // Hämtar alla Böcker och lägger de i en lista
         get_allBooks();
-        //TODO stream med sorted()
-        // först sortera genre i bokstavsordning och sen i varje genre ska jag gå igenom varje bok 
-        // som har den genre och skriva ut de och sen fortsätta till nästa genre
-        List<Books> genreBooksSortera;
+        // 1. Sortera listan först efter Genre, sedan efter Titel
+        List<Books> sortedBooks = listBooks.stream()
+                .sorted(Comparator.comparing(Books::getGenre)
+                        .thenComparing(Books::getTitle)) // Sorterar titlar inom samma genre
+                .collect(Collectors.toList());
+
+        // 2. Skriv ut resultatet med rubriker för varje genre
+        String currentGenre = "";
+
+        for (Books b : sortedBooks) {
+            // Om genren ändras, skriv ut en ny rubrik
+            if (!b.getGenre().equals(currentGenre)) {
+                currentGenre = b.getGenre();
+                IO.println("\n--- GENRE: " + currentGenre.toUpperCase() + " ---");
+            }
+
+            // Skriv ut boken
+            IO.println(b);
+        }
     }
 
-    public void filtreraFörfattare(){
+    public void filtreraFörfattare() {
         // Hämtar alla Böcker och lägger de i en lista
         get_allBooks();
         // while loop tills du ha valt rätt
@@ -208,51 +227,52 @@ public class BooksList implements SaveToFile{
             IO.println("Säg författare du vill sortera efter: ");
             String författare = IO.readln();
             List<Books> författareBooksFiltrera = listBooks.stream()
-            .filter(f -> f.getAuthor().equalsIgnoreCase(författare))
-            .collect(Collectors.toList());
+                    .filter(f -> f.getAuthor().equalsIgnoreCase(författare))
+                    .collect(Collectors.toList());
             if (författareBooksFiltrera.isEmpty()) {
                 IO.println("Ingen bok av den författare, välj en annan");
                 return;
-            }
-            else {
+            } else {
                 IO.println("Hittade böcker\n");
                 for (Books books : författareBooksFiltrera) {
-                    IO.println("- "+books);
+                    IO.println("- " + books);
                 }
                 filtreraFörfattareböcker = false;
             }
         }
     }
-    public void filtreraGenre(){
+
+    public void filtreraGenre() {
         // Hämtar alla Böcker och lägger de i en lista
         get_allBooks();
         // while loop tills du ha valt rätt
         boolean filtreragenreböcker = true;
         while (filtreragenreböcker) {
             // Sortera efter en specifik genre
-            IO.println("Säg genre du vill sortera efter (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
+            IO.println(
+                    "Säg genre du vill sortera efter (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
             String genre = IO.readln();
             List<Books> genrefiltreraböcker = listBooks.stream()
-            .filter(g -> g.getGenre().equalsIgnoreCase(genre))
-            .collect(Collectors.toList());
+                    .filter(g -> g.getGenre().equalsIgnoreCase(genre))
+                    .collect(Collectors.toList());
             if (genrefiltreraböcker.isEmpty()) {
                 IO.println("Ingen bok av den genre, välj en annan");
                 return;
-            }
-            else {
+            } else {
                 IO.println("Hittade böcker\n");
                 for (Books books : genrefiltreraböcker) {
-                    IO.println("- "+books);
+                    IO.println("- " + books);
                 }
                 filtreragenreböcker = false;
             }
         }
     }
 
-    public void save(){
+    public void save() {
 
     }
-    public void read(){
+
+    public void read() {
 
     }
 }

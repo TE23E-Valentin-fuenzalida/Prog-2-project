@@ -84,111 +84,115 @@ public class Biblotekssystem {
         String val = IO.readln();
         return val;
     }
-    
+
     public String SkriaUtMeny() {
         IO.println("""
-            välj hur du vill skriva ut
-            1. bokstavsordning
-            2. sortera
-            3. Filtrerar
-            4. Antal
-            """);
-            String val = IO.readln();
-            return val;
-        }
+                välj hur du vill skriva ut
+                1. Bokstavsordning
+                2. Sortera
+                3. Filtrerar
+                4. Antal
+                """);
+        String val = IO.readln();
+        return val;
+    }
 
-        // Filtrera
-        public String Filtrera(){
-            IO.println("""
-                    Filtrera
-                    1. Tidningar
-                    2. Böcker
-                    """);
-                    String val = IO.readln();
-                    return val;
-        }
-        // Filtrera Böcker
-        public String FiltreraBooks(){
-            IO.println("""
-            1. genre
-            2. Författare
-                    """);
-                    String val = IO.readln();
-                    return val;
-        }
-        // filtrera tidningar
-        public String FiltreraMagazines(){
-            IO.println("""
-            1. Published Year
-            2. Category
-                    """);
-                    String val = IO.readln();
-                    return val;
-        }
+    // Filtrera
+    public String Filtrera() {
+        IO.println("""
+                Filtrera
+                1. Tidningar
+                2. Böcker
+                """);
+        String val = IO.readln();
+        return val;
+    }
 
-        // sortera 
-        public String Sortera(){
-            IO.println("""
-            Sortera
-            1. Böcker
-            2. Tidningar
-                    """);
-                    String val = IO.readln();
-                    return val;
-        }
-        // sortera böcker
-        public String SorteraBooks(){
-            IO.println("""
-            1. Författare
-            2. genre
-            3. isAvaliable
-                    """);
-                    String val = IO.readln();
-                    return val;
-        }
+    // Filtrera Böcker
+    public String FiltreraBooks() {
+        IO.println("""
+                1. genre
+                2. Författare
+                        """);
+        String val = IO.readln();
+        return val;
+    }
 
+    // filtrera tidningar
+    public String FiltreraMagazines() {
+        IO.println("""
+                1. Published Year
+                2. Category
+                        """);
+        String val = IO.readln();
+        return val;
+    }
 
-        // sortera tidningar
-        public String SorteraMagazines(){
-            IO.println("""
-            1. Published Year
-            2. genre
-            3. isAvaliable
-                    """);
-                    String val = IO.readln();
-                    return val;
-        }
+    // sortera
+    public String Sortera() {
+        IO.println("""
+                Sortera
+                1. Böcker
+                2. Tidningar
+                        """);
+        String val = IO.readln();
+        return val;
+    }
 
-        // Antal
-        public String Antal(){
-            IO.println("""
-            Antal
-            1. Böcker
-            2. Tidningar
-            3. Kunder
-            4. Avstängda
-                    """);
-                    String val = IO.readln();
-                    return val;
-        }
-        // Antal Böcker
-        public String AntalBooks(){
-            IO.println("""
-            1. antal Böcker för en specifik förttare
-            2. antal Böcker för en specifik genre
-            3. antal Böcker som kan lånas
-                    """);
-                    String val = IO.readln();
-                    return val;
-        }
-        // Antal Tidningar
-        public String AntalMagazines(){
-            IO.println("""
-            1. antal tidningar på ett specifikt år 
-            2. antal tidningar på en specifk kategori
-            3. antal tidningar som kan lånas
-                    """);
-                    String val = IO.readln();
-                    return val;
-        }
+    // sortera böcker
+    public String SorteraBooks() {
+        IO.println("""
+                1. Författare
+                2. genre
+                3. isAvaliable
+                        """);
+        String val = IO.readln();
+        return val;
+    }
+
+    // sortera tidningar
+    public String SorteraMagazines() {
+        IO.println("""
+                1. Published Year
+                2. genre
+                3. isAvaliable
+                        """);
+        String val = IO.readln();
+        return val;
+    }
+
+    // Antal
+    public String Antal() {
+        IO.println("""
+                Antal
+                1. Böcker
+                2. Tidningar
+                3. Kunder
+                4. Avstängda
+                        """);
+        String val = IO.readln();
+        return val;
+    }
+
+    // Antal Böcker
+    public String AntalBooks() {
+        IO.println("""
+                1. antal Böcker för en specifik förttare
+                2. antal Böcker för en specifik genre
+                3. antal Böcker som kan lånas
+                        """);
+        String val = IO.readln();
+        return val;
+    }
+
+    // Antal Tidningar
+    public String AntalMagazines() {
+        IO.println("""
+                1. antal tidningar på ett specifikt år
+                2. antal tidningar på en specifk kategori
+                3. antal tidningar som kan lånas
+                        """);
+        String val = IO.readln();
+        return val;
+    }
 }

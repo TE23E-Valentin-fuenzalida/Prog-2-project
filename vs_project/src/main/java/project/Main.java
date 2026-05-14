@@ -99,12 +99,15 @@ public class Main {
                     break;
                 case "6":
                     String val7 = system.SkriaUtMeny();
-                    if (val7.equals("1")) {
-                        listBooks.Sortera();
-                    } else if (val7.equals("2")) {
-                        listMagazines.Sortera();
-                    } else if (val7.equals("3")) {
-                        listUsers.Sortera();
+                    if (val7.equals("2")) {
+                        String val7_1 = system.Sortera();
+
+                        if (val7_1.equals("1")) {
+                            String val7_1_2 = system.SorteraBooks();
+                            if (val7_1_2.equals("2")) {
+                                listBooks.SorteraGenre();
+                            }
+                        }
                     }
                     break;
                 case "7":
