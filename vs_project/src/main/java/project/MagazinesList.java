@@ -285,6 +285,8 @@ public class MagazinesList implements SaveToFile {
         }
     }
 
+    
+
     public void save() {
 
     }

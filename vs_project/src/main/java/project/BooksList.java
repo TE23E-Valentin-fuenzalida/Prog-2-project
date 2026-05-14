@@ -10,11 +10,6 @@ ta bort en bok i servern och skriva ut böcker i bokstavsordning beroende på ti
 //TODO (Andra) använda hashmap så att jag kan söka efter saker snabbt
 //TODO (Sist) använda packet för att sortera in metoderna enklare
 //TODO (Sist) använda en packet för alla getall och sätt frågor för varje med if satser så att Main behöver endast en metod. samma med alla andra metoder som finns i alla mina listor
-//TODO (Första) fixa så att sortera med metoder går medhjälp av streams
-//TODO (Första) Kunna filtrera för författare (Streams)
-//TODO (Första) Kunna filtrera för genre (streams)
-//TODO (Första) Kunna sortera för författare (streams)
-//TODO (Första) Kunna sortera för genre (streams)
 //TODO (Första) Kunna ge antal böcker för en författare (streams)
 //TODO (Första) Kunna ge antal Böcker för 
 
@@ -258,26 +253,47 @@ public class BooksList implements SaveToFile {
         // Hämtar alla Böcker och lägger de i en lista
         get_allBooks();
         // while loop tills du ha valt rätt
-        boolean filtreragenreböcker = true;
-        while (filtreragenreböcker) {
+        boolean filtreragenre = true;
+        while (filtreragenre) {
             // Sortera efter en specifik genre
             IO.println(
                     "Säg genre du vill sortera efter (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
             String genre = IO.readln();
-            List<Books> genrefiltreraböcker = listBooks.stream()
+            List<Books> genrefiltrera = listBooks.stream()
                     .filter(g -> g.getGenre().equalsIgnoreCase(genre))
                     .collect(Collectors.toList());
-            if (genrefiltreraböcker.isEmpty()) {
+            if (genrefiltrera.isEmpty()) {
                 IO.println("Ingen bok av den genre, välj en annan");
                 return;
             } else {
                 IO.println("Hittade böcker\n");
-                for (Books books : genrefiltreraböcker) {
+                for (Books books : genrefiltrera) {
                     IO.println("- " + books);
                 }
-                filtreragenreböcker = false;
+                filtreragenre = false;
             }
         }
+    }
+
+    public void antalförfattare(){
+        get_allBooks();
+        IO.println("Säg den författare där du vill veta antalet böcker de har skrivit");
+        String författare = IO.readln();
+        long antalförfattare = listBooks.stream()
+                      .filter(a -> a.getAuthor().equalsIgnoreCase(författare))
+                      .count();
+        
+        IO.println("Antal böcker som "+författare+" har skrivit är: "+antalförfattare);
+    }
+    public void antalgenre(){
+        get_allBooks();
+        IO.println("Säg den genre där du vill veta antalet böcker som finns av den genre");
+        String genre = IO.readln();
+        long antalgenre = listBooks.stream()
+                      .filter(a -> a.getGenre().equalsIgnoreCase(genre))
+                      .count();
+        
+        IO.println("Antal böcker som "+genre+" har skrivit är: "+antalgenre);
     }
 
     public void save() {

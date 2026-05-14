@@ -177,7 +177,7 @@ public class Biblotekssystem {
     // Antal Böcker
     public String AntalBooks() {
         IO.println("""
-                1. antal Böcker för en specifik förttare
+                1. antal Böcker för en specifik författare
                 2. antal Böcker för en specifik genre
                 3. antal Böcker som kan lånas
                         """);
