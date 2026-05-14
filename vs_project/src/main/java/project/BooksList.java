@@ -183,13 +183,25 @@ public class BooksList implements SaveToFile {
     public void SorteraFörfattare() {
         // Hämtar alla Books och lägger de i en lista
         get_allBooks();
-        // while loop till du väljer rätt
-        // TODO stream med sorted()
-        // först sortera författarna i bokstavsordning och sen i varje författare ska
-        // jag gå igenom varje bok
-        // som har den författaren och skriva ut de och sen fortsätta till nästa
-        // författare
-        List<Books> författareSortera;
+        // 1. Sortera listan först efter Genre, sedan efter Titel
+        List<Books> sortedBooks = listBooks.stream()
+                .sorted(Comparator.comparing(Books::getAuthor)
+                        .thenComparing(Books::getTitle)) // Sorterar titlar inom samma genre
+                .collect(Collectors.toList());
+
+        // 2. Skriv ut resultatet med rubriker för varje genre
+        String currentGenre = "";
+
+        for (Books b : sortedBooks) {
+            // Om genren ändras, skriv ut en ny rubrik
+            if (!b.getGenre().equals(currentGenre)) {
+                currentGenre = b.getAuthor();
+                IO.println("\n--- GENRE: " + currentGenre.toUpperCase() + " ---");
+            }
+
+            // Skriv ut boken
+            IO.println(b);
+        }
 
     }
 
