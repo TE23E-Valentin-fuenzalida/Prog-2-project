@@ -213,8 +213,8 @@ public class MagazinesList implements SaveToFile {
         for (Magazines m : sortedMagazinesCategory) {
             // Om genren ändras, skriv ut en ny rubrik
             if (!m.getCatogory().equals(currentCategory)) {
-                currentCategory = m.getGenre();
-                IO.println("\n--- GENRE: " + currentCategory.toUpperCase() + " ---");
+                currentCategory = m.getCatogory();
+                IO.println("\n--- Category: " + currentCategory.toUpperCase() + " ---");
             }
 
             // Skriv ut boken
@@ -222,53 +222,65 @@ public class MagazinesList implements SaveToFile {
         }
     }
 
-    public void filtreraFörfattare() {
+    public void FiltreraPublishedYear() {
         // Hämtar alla Böcker och lägger de i en lista
-        get_allBooks();
+        get_allMagazines();
         // while loop tills du ha valt rätt
-        boolean filtreraFörfattareböcker = true;
-        while (filtreraFörfattareböcker) {
+        boolean filtreraPublishedYear = true;
+        while (filtreraPublishedYear) {
             // filtrerar ut en specifik författare
-            IO.println("Säg författare du vill filtrera ut: ");
-            String författare = IO.readln();
-            List<Books> författareBooksFiltrera = listBooks.stream()
-                    .filter(f -> f.getAuthor().equalsIgnoreCase(författare))
-                    .collect(Collectors.toList());
-            if (författareBooksFiltrera.isEmpty()) {
-                IO.println("Ingen bok av den författare, välj en annan");
-                return;
-            } else {
-                IO.println("Hittade böcker\n");
-                for (Books books : författareBooksFiltrera) {
-                    IO.println("- " + books);
+            IO.println("Säg året du vill filtrera ut: ");
+            String Year = IO.readln();
+            int publishedYear = 0;
+            try {
+                publishedYear = Integer.parseInt(Year);
+
+                final int searchYear = publishedYear;
+
+                List<Magazines> publishedYearfiltrera = listMagazines.stream()
+                        .filter(p -> p.getPublishedYear() == searchYear)
+                        .collect(Collectors.toList());
+                
+
+                if (publishedYearfiltrera.isEmpty()) {
+                    IO.println("Ingen tidningar hittades från år"+publishedYear+", försök igen");
+                    return;
+                } else {
+                    IO.println("Hittade böcker\n");
+                    for (Magazines magazines : publishedYearfiltrera) {
+                        IO.println("- " + magazines);
+                    }
+                    filtreraPublishedYear = false;
                 }
-                filtreraFörfattareböcker = false;
+                break;
+            } catch (NumberFormatException e) {
+                IO.println("fel inmattning. skriv ett år (t.ex. 2024)");
             }
         }
     }
 
-    public void filtreraGenre() {
+    public void filtreraCategory() {
         // Hämtar alla Böcker och lägger de i en lista
-        get_allBooks();
+        get_allMagazines();
         // while loop tills du ha valt rätt
-        boolean filtreragenreböcker = true;
-        while (filtreragenreböcker) {
+        boolean filtreraCategory = true;
+        while (filtreraCategory) {
             // Sortera efter en specifik genre
             IO.println(
-                    "Säg genre du vill sortera efter (Crime, Drama, Mystery, Adventure, Romance, Fantasy, Thriller eller Science Fiction): ");
-            String genre = IO.readln();
-            List<Books> genrefiltreraböcker = listBooks.stream()
-                    .filter(g -> g.getGenre().equalsIgnoreCase(genre))
+                    "Säg Category du vill filtrera ut: ");
+            String Category = IO.readln();
+            List<Magazines> categoryfiltrera = listMagazines.stream()
+                    .filter(c -> c.getCatogory().equalsIgnoreCase(Category))
                     .collect(Collectors.toList());
-            if (genrefiltreraböcker.isEmpty()) {
-                IO.println("Ingen bok av den genre, välj en annan");
+            if (categoryfiltrera.isEmpty()) {
+                IO.println("Ingen tidning av den Category hittades, välj en annan");
                 return;
             } else {
                 IO.println("Hittade böcker\n");
-                for (Books books : genrefiltreraböcker) {
-                    IO.println("- " + books);
+                for (Magazines magazines : categoryfiltrera) {
+                    IO.println("- " + magazines);
                 }
-                filtreragenreböcker = false;
+                filtreraCategory = false;
             }
         }
     }
