@@ -1,4 +1,4 @@
-package project;
+package project.Listor;
 
 /* 
 Valentin fuenzalida ribbing
@@ -24,6 +24,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import project.Basklasser.*;
+import project.system.*;
 
 public class MagazinesList implements SaveToFile {
     private ArrayList<Magazines> listMagazines = new ArrayList<>();

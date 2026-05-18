@@ -1,4 +1,4 @@
-package project;
+package project.Basklasser;
 
 public class Users implements Comparable<Users>{
     // variabler

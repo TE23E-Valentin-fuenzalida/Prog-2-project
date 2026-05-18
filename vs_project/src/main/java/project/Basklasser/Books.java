@@ -1,4 +1,7 @@
-package project;
+package project.Basklasser;
+
+import project.system.library;
+
 /* 
 Valentin fuenzalida ribbing
 Books innehåller variabler med en konstuktor, getters, setters och

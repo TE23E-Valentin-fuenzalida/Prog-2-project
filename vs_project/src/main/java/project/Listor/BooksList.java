@@ -1,4 +1,4 @@
-package project;
+package project.Listor;
 
 /* 
 Valentin fuenzalida ribbing
@@ -8,10 +8,6 @@ ta bort en bok i servern och skriva ut böcker i bokstavsordning beroende på ti
  */
 
 //TODO (Andra) använda hashmap så att jag kan söka efter saker snabbt
-//TODO (Sist) använda packet för att sortera in metoderna enklare
-//TODO (Sist) använda en packet för alla getall och sätt frågor för varje med if satser så att Main behöver endast en metod. samma med alla andra metoder som finns i alla mina listor
-//TODO (Första) Kunna ge antal böcker för en författare (streams)
-//TODO (Första) Kunna ge antal Böcker för 
 
 //GSON objekt som vi behöver
 import com.google.gson.*;
@@ -22,6 +18,9 @@ import java.lang.reflect.Type;
 import kong.unirest.Unirest;
 import kong.unirest.HttpResponse;
 import kong.unirest.UnirestException;
+import project.Basklasser.Books;
+import project.system.Main;
+import project.system.SaveToFile;
 
 // kunna lagra objekt i listor och ändra i arraylistor
 import java.util.ArrayList;

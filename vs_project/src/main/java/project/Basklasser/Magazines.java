@@ -1,9 +1,11 @@
-package project;
+package project.Basklasser;
 /* 
 Valentin fuenzalida ribbing
 magazines innehåller variabler med en konstuktor, getters, setters och
 två override en för att skriva ut och en för sortera.
 */
+
+import project.system.library;
 
 //TODO fixa så Loan_days
 public class Magazines extends library implements Comparable<Magazines>{

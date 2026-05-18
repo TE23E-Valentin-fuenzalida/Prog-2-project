@@ -1,4 +1,4 @@
-package project;
+package project.Basklasser;
 /* 
 Valentin fuenzalida ribbing
 SuspendedUsers innehåller variabler med en konstuktor, getters, setters och

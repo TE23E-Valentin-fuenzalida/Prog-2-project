@@ -1,4 +1,4 @@
-package project;
+package project.system;
 /* 
 Valentin fuenzalida ribbing
 library innehåller variabler med en konstuktor och getters.

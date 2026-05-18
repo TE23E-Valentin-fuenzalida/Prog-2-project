@@ -1,10 +1,11 @@
-package project;
+package project.system;
 
 /* 
 Valentin fuenzalida ribbing
 Biblotekssystemet innehåller en metod för huvud menyn och 6 andera menyer som under menyer
 */
 
+//TODO create en stor meny metod för alla menyer
 public class Biblotekssystem {
 
     // huvudmeny

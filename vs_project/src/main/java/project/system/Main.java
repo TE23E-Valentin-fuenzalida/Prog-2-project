@@ -1,4 +1,12 @@
-package project;
+package project.system;
+
+import project.Basklasser.SuspendedUsers;
+import project.Basklasser.Users;
+import project.Listor.BooksList;
+import project.Listor.SuspendedUsersList;
+import project.Listor.UsersList;
+
+import project.Listor.*;
 
 /* 
 Valentin fuenzalida ribbing
