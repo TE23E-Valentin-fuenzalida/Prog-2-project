@@ -30,8 +30,9 @@ public class Main {
     // baseUrl för ej skolan
        public static final String baseURL = "http://localhost:3000/";
        // skapar alla object av klasserna som jag använder
+       static Biblotekssystem system = new Biblotekssystem();
     void main() {
-        
+        system.meny();
 
     }
 }

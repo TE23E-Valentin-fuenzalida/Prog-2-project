@@ -21,7 +21,6 @@ public class Biblotekssystem {
        static MagazinesList listMagazines = new MagazinesList();
        static BooksList listBooks = new BooksList();
        static SuspendedUsersList listSuspendedUsers = new SuspendedUsersList();
-       static Main main = new Main();
 
 private ArrayList<MagazinesList> MagazinesReg;
 private ArrayList<UsersList> UsersReg;
@@ -102,7 +101,15 @@ private ArrayList<SuspendedUsersList> SuspendedUsersReg;
                 case "6":
                     String val7 = SkriaUtMeny();
                     if (val7.equals("1")) {
-                        
+                        String val7_1 = BokstavsordningMeny();
+                        if (val7_1.equals("1")) {
+                            listBooks.Sorterabokstavsordning();
+                        }
+                        else if (val7_1.equals("2")) {
+                            listMagazines.Sorterabokstavsordning();
+                        } else if (val7_1.equals("3")) {
+                            listUsers.Sortera();
+                        } 
                     } else if (val7.equals("2")) {
                         String val7_2 = Sortera();
                             if (val7_2.equals("1")) {
@@ -220,6 +227,18 @@ private ArrayList<SuspendedUsersList> SuspendedUsersReg;
                 """);
         String val = IO.readln();
         return val;
+    }
+
+    // bokstavsordning
+    public String BokstavsordningMeny(){
+        IO.println("""
+                Välj vilken du vill få bokstavsordning för
+                1. böcker
+                2. tidningar
+                3. kunder
+                """);
+                String val = IO.readln();
+                return val;
     }
 
     // Filtrera

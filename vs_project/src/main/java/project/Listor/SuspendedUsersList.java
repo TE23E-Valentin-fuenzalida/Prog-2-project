@@ -17,11 +17,13 @@ import kong.unirest.Unirest;
 import kong.unirest.HttpResponse;
 import kong.unirest.UnirestException;
 import project.Basklasser.SuspendedUsers;
+import project.Basklasser.Users;
 import project.system.Main;
 import project.system.SaveToFile;
 
 // kunna lagra objekt i listor och ändra i arraylistor
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class SuspendedUsersList implements SaveToFile{
