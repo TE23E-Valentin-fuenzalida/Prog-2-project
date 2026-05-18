@@ -14,6 +14,9 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 //importera Type för att hjälpa json att omvandla data
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 //Unirest objekt som vi behöver
 import kong.unirest.Unirest;
 import kong.unirest.HttpResponse;
@@ -30,6 +33,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Comparator;
+import java.util.HashSet;
 
 public class BooksList implements SaveToFile {
 
@@ -296,7 +300,7 @@ public class BooksList implements SaveToFile {
     }
 
     public void save() {
-
+        
     }
 
     public void read() {

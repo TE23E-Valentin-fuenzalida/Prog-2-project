@@ -113,17 +113,55 @@ private ArrayList<SuspendedUsersList> SuspendedUsersReg;
                     } else if (val7.equals("2")) {
                         String val7_2 = Sortera();
                             if (val7_2.equals("1")) {
-                                String val7_2_2 = SorteraBooks();
-                                if (val7_2_2.equals("2")) {
+                                String val7_2_1 = SorteraBooks();
+                                if (val7_2_1.equals("1")) {
+                                    listBooks.SorteraFörfattare();
+                                }
+                                else if (val7_2_1.equals("2")) {
                                     listBooks.SorteraGenre();
+                                }
+                            }
+                            else if (val7_2.equals("2")) {
+                                String val7_2_2 = SorteraMagazines();
+                                if (val7_2_2.equals("1")) {
+                                    listMagazines.SorteraPublishedYear();
+                                } else if (val7_2_2.equals("2")) {
+                                    listMagazines.SorteraCategory();
                                 }
                             }
                     } else if (val7.equals("3")) {
                         String val7_3 = Filtrera();
                         if (val7_3.equals("1")) {
                             String val7_3_1 = FiltreraBooks();
-                            if (val7_3_1.equals("2")) {
+                            if (val7_3_1.equals("1")) {
                                 listBooks.filtreraFörfattare();
+                            } else if (val7_3_1.equals("2")) {
+                                listBooks.filtreraGenre();
+                            }
+                        }
+                        else if (val7_3.equals("2")) {
+                            String val7_3_2 = FiltreraMagazines();
+                            if (val7_3_2.equals("1")) {
+                                listMagazines.FiltreraPublishedYear();
+                            } else if (val7_3_2.equals("2")) {
+                                listMagazines.filtreraCategory();
+                            }
+                        }
+                    } if (val7.equals("4")) {
+                        String val7_4 = Antal();
+                        if (val7_4.equals("1")) {
+                            String val7_4_1 = AntalBooks();
+                            if (val7_4_1.equals("1")) {
+                                listBooks.antalförfattare();
+                            } else if (val7_4_1.equals("2")) {
+                                listBooks.antalgenre();
+                            }
+                        } else if (val7_4.equals("2")) {
+                            String val7_4_2 = AntalMagazines();
+                            if (val7_4_2.equals("1")) {
+                                listMagazines.antalpublishedYear();
+                            } else if (val7_4_2.equals("2")) {
+                                listMagazines.antalCategory();
                             }
                         }
                     }
@@ -255,8 +293,8 @@ private ArrayList<SuspendedUsersList> SuspendedUsersReg;
     // Filtrera Böcker
     public String FiltreraBooks() {
         IO.println("""
-                1. genre
-                2. Författare
+                1. Författare
+                2. Genre
                         """);
         String val = IO.readln();
         return val;
@@ -288,7 +326,6 @@ private ArrayList<SuspendedUsersList> SuspendedUsersReg;
         IO.println("""
                 1. Författare
                 2. genre
-                3. isAvaliable
                         """);
         String val = IO.readln();
         return val;
@@ -298,8 +335,7 @@ private ArrayList<SuspendedUsersList> SuspendedUsersReg;
     public String SorteraMagazines() {
         IO.println("""
                 1. Published Year
-                2. genre
-                3. isAvaliable
+                2. Category
                         """);
         String val = IO.readln();
         return val;
@@ -311,8 +347,6 @@ private ArrayList<SuspendedUsersList> SuspendedUsersReg;
                 Antal
                 1. Böcker
                 2. Tidningar
-                3. Kunder
-                4. Avstängda
                         """);
         String val = IO.readln();
         return val;
@@ -323,7 +357,6 @@ private ArrayList<SuspendedUsersList> SuspendedUsersReg;
         IO.println("""
                 1. antal Böcker för en specifik författare
                 2. antal Böcker för en specifik genre
-                3. antal Böcker som kan lånas
                         """);
         String val = IO.readln();
         return val;
@@ -334,7 +367,6 @@ private ArrayList<SuspendedUsersList> SuspendedUsersReg;
         IO.println("""
                 1. antal tidningar på ett specifikt år
                 2. antal tidningar på en specifk kategori
-                3. antal tidningar som kan lånas
                         """);
         String val = IO.readln();
         return val;
