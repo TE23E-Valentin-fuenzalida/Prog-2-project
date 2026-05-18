@@ -299,7 +299,7 @@ public class MagazinesList implements SaveToFile {
                 final int antalYear = publishedYear;
                 
                         long antalpublishedYear = listMagazines.stream()
-                                      .filter(a -> a.getPublishedYear() == antalYear)
+                                      .filter(a -> a.getPublishedYear()==antalYear)
                                       .count();
                                       IO.println("Antal böcker som "+publishedYear+" har skrivit är: "+antalpublishedYear);
             } catch (Exception e) {

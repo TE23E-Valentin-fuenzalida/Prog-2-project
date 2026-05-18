@@ -1,12 +1,136 @@
 package project.system;
 
+import java.util.ArrayList;
+
+import project.Basklasser.SuspendedUsers;
+import project.Basklasser.Users;
+
 /* 
 Valentin fuenzalida ribbing
 Biblotekssystemet innehåller en metod för huvud menyn och 6 andera menyer som under menyer
 */
 
+import project.Listor.*;
+
 //TODO create en stor meny metod för alla menyer
 public class Biblotekssystem {
+
+
+           // skapar alla object av klasserna som jag använder
+       static UsersList listUsers = new UsersList();
+       static MagazinesList listMagazines = new MagazinesList();
+       static BooksList listBooks = new BooksList();
+       static SuspendedUsersList listSuspendedUsers = new SuspendedUsersList();
+       static Main main = new Main();
+
+private ArrayList<MagazinesList> MagazinesReg;
+private ArrayList<UsersList> UsersReg;
+private ArrayList<BooksList> BooksReg;
+private ArrayList<SuspendedUsersList> SuspendedUsersReg; 
+
+
+    public void meny(){
+        boolean program = true;
+        IO.println("Startar JSON klient");
+        IO.println();
+        while (program) {
+
+            String val1 = huvudMeny();
+
+            switch (val1) {
+                case "1":
+                    String val2 = hämtaUtAllaMeny();
+                    if (val2.equals("1")) {
+                        listBooks.get_allBooks();
+                    }
+                    else if (val2.equals("2")) {
+                        listMagazines.get_allMagazines();
+                    } else if (val2.equals("3")) {
+                        listUsers.get_allUsers();
+                    } else if (val2.equals("4")) {
+                        listSuspendedUsers.get_allSuspendedUsers();
+                    }
+                    break;
+                case "2":
+                    String val3 = hämtaUtEnMeny();
+                    if (val3.equals("1")) {
+                        listBooks.Sök();
+                    }
+                    else if (val3.equals("2")) {
+                        listMagazines.Sök();
+                    } else if (val3.equals("3")) {
+                        listUsers.Sök();
+                    } else if (val3.equals("4")) {
+                        listSuspendedUsers.Sök();
+                    }
+                    break;
+                case "3":
+                    String val4 = SkapaNyttMeny();
+                    if (val4.equals("1")) {
+                        listBooks.LäggTill();
+                    } else if (val4.equals("2")) {
+                        listMagazines.LäggTill();
+                    } else if (val4.equals("3")) {
+                        listUsers.LäggTill();
+                    } else if (val4.equals("4")) {
+                        listSuspendedUsers.LäggTill();
+                    }
+                    break;
+                case "4":
+                    String val5 = SökaMeny();
+                    if (val5.equals("1")) {
+                        listBooks.Sök();
+                    } else if (val5.equals("2")) {
+                            listMagazines.Sök();
+                    } else if (val5.equals("3")) {
+                            listUsers.Sök();
+                    }
+                    break;
+                case "5":
+                    String val6 = TabortMeny();
+                    if (val6.equals("1")) {
+                        listBooks.TaBort();
+                    }
+                    else if (val6.equals("2")) {
+                        listMagazines.TaBort();
+                    } else if (val6.equals("3")) {
+                        listUsers.TaBort();
+                    } else if (val6.equals("4")) {
+                        listSuspendedUsers.TaBort();
+                    }
+                    break;
+                case "6":
+                    String val7 = SkriaUtMeny();
+                    if (val7.equals("1")) {
+                        
+                    } else if (val7.equals("2")) {
+                        String val7_2 = Sortera();
+                            if (val7_2.equals("1")) {
+                                String val7_2_2 = SorteraBooks();
+                                if (val7_2_2.equals("2")) {
+                                    listBooks.SorteraGenre();
+                                }
+                            }
+                    } else if (val7.equals("3")) {
+                        String val7_3 = Filtrera();
+                        if (val7_3.equals("1")) {
+                            String val7_3_1 = FiltreraBooks();
+                            if (val7_3_1.equals("2")) {
+                                listBooks.filtreraFörfattare();
+                            }
+                        }
+                    }
+                    break;
+                case "7":
+                    fårduLåna();
+                    break;
+                default:
+                    program = false;
+                    break;
+            }
+
+        }
+    }
 
     // huvudmeny
     public String huvudMeny() {
@@ -195,5 +319,32 @@ public class Biblotekssystem {
                         """);
         String val = IO.readln();
         return val;
+    }
+
+    public void fårduLåna(){
+        // hämtar alla Users och suspendedUsers från servern och lägger de i lista
+        listUsers.get_allUsers();
+        listSuspendedUsers.get_allSuspendedUsers();
+        // frågar användaren för ett id för en kund
+        IO.println("Skriv namnet på kunden: ");
+        String namn = IO.readln().toLowerCase();
+    
+        //loopar igenom listUsers för att hitta ett object med samma namn
+        for (Users user : listUsers.getListUsers()) {
+            if (user.getName().toLowerCase().equals(namn)) {
+                // hämtar id för den user som matchade namnet
+                String id = user.getId();
+                // loopar igenom suspendedUsers list för att kolla om någon av id matchar id för kunden
+                for (SuspendedUsers suspendedUser : listSuspendedUsers.getListSuspendedUsers()) {
+                    if (id.equals(suspendedUser.getUserId())) {
+                        IO.println("Kunden är avstängd");
+                        return;
+                    }
+                }
+                IO.println("Kunden får låna");
+                return;
+            }
+        }   
+        IO.println("Ingen kund hittades");
     }
 }
